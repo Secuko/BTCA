@@ -1,0 +1,84 @@
+{
+    "CREATED_BY": "Created by BTCA Community",
+    "COPYRIGHT": "© 2019-2021 BTCA Community & BTCA Foundation",
+    "ASIDE_TEXT": "BTCA - это децентрализованная, одноранговая валюта с открытым исходным кодом, отличающаяся расширенными функциями конфиденциальности",
+    "LINKS": [
+        {
+            "HEADER_NAME": "BTCA",
+            "LINKS": [
+                {
+                    "name": "Продвинутый Proof of Stake"
+                },
+                {
+                    "name": "Холодный стекинг"
+                },
+                {
+                    "name": "Конфиденциальность Shield"
+                },
+                {
+                    "name": "Загрузки"
+                },
+                {
+                    "name": "Мастерноды"
+                },
+                {
+                    "name": "Мерчанты"
+                },
+                {
+                    "name": "Биржи"
+                }
+            ]
+        },
+        {
+            "HEADER_NAME": "Ресурсы",
+            "LINKS": [
+                {
+                    "name": "Новости"
+                },
+                {
+                    "name": "Десктоп Приложение"
+                },
+                {
+                    "name": "Мобильное Приложение"
+                }
+            ]
+        },
+        {
+            "HEADER_NAME": "Ресурсы",
+            "LINKS": [
+                {
+                    "name": "FAQ"
+                },
+                {
+                    "name": "Саппорт"
+                },
+                {
+                    "name": "Комьюнити"
+                },
+                {
+                    "name": "Почему BTCA"
+                },
+                {
+                    "name": "O BTCA"
+                }
+            ]
+        },
+        {
+            "HEADER_NAME": "Документация",
+            "LINKS": [
+                {
+                    "name": "Документы"
+                },
+                {
+                    "name": "Terms of Use"
+                },
+                {
+                    "name": "Privacy Policy"
+                },
+                {
+                    "name": "Legal Notices"
+                }
+            ]
+        }
+    ]
+}

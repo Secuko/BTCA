@@ -1,39 +1,7 @@
 <script>
+import constants from '../constants/main.json';
 export default {
-    setup() {
-        // Константы для использования только в этом компоненте
-        const H1_TEXT = "Становитесь своим собственным банком"
-        const SMALL_TEXT = "Получите свободу, благодаря конфиденциальным, глобальным цифровым деньгам. Становитесь своим собственным банком с полным контролем над своими цифровыми активами."
-        const SLIDER_DATA = [
-            {
-                header_text: "Быстро. Доступно. Безопасно",
-                h3_text: "Глобальные транзакции",
-                small_text: "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
-                button_text: "Перейти и получить",
-                button_action: () => { console.log("1") },
-            },
-            {
-                header_text: "Помогите зашитить сеть",
-                h3_text: "И получите вознаграждение",
-                small_text: "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
-                button_text: "Перейти и получить",
-                button_action: () => { console.log("2") },
-            },
-            {
-                header_text: "Защитите свои активы с помощью",
-                h3_text: "Секретных транзакций",
-                small_text: "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
-                button_text: "Перейти и получить",
-                button_action: () => { console.log("3") },
-            }
-        ];
 
-        return {
-            H1_TEXT,
-            SMALL_TEXT,
-            SLIDER_DATA,
-        };
-    },
     data() {
         return {
             BUTTON_DATA: [
@@ -51,6 +19,11 @@ export default {
 
         };
     },
+    computed: {
+        constants() {
+            return constants;
+        }
+    }
 }
 
 </script>
@@ -61,15 +34,15 @@ export default {
         <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
         <div class="main-text">
             <div class="main-text__h1-wrapper">
-                <h1>{{ H1_TEXT }}</h1>
+                <h1>{{ constants.H1_TEXT }}</h1>
             </div>
             <div class="main-text__p-wrapper">
-                <p>{{ SMALL_TEXT }}</p>
+                <p>{{ constants.SMALL_TEXT }}</p>
             </div>
         </div>
         <div class="slider">
             <div class="slider__items">
-                <div class="slider-item " v-for="(item, index) in SLIDER_DATA" :key="index">
+                <div class="slider-item " v-for="(item, index) in constants.SLIDER_DATA" :key="index">
                     <div class="blur-layer"></div>
                     <div class="item-body">
                         <p class="item-body__header-text">
@@ -81,7 +54,7 @@ export default {
                         <p class="item-body__small-text">
                             {{ item.small_text }}
                         </p>
-                        <button class="item-button" @click="item.action">
+                        <button class="item-button">
                             <span class="item-button_text">
                                 {{ item.button_text }}
                             </span>
@@ -264,7 +237,7 @@ p {
     border-radius: 50%;
     border: 0.1rem solid rgba($white, 0.11);
 
-    &:hover{
+    &:hover {
         border: 0.1rem solid $white;
     }
 }

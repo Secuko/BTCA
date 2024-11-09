@@ -1,11 +1,9 @@
 <script>
 
-
+import constants from '../constants/header.json'
 export default {
     data() {
         return {
-            LANGUAGE: "RUS",
-            NUMBER: "10.834",
             HEADER_MENU: [
                 {
                     name: "Функции",
@@ -40,6 +38,11 @@ export default {
             ]
         };
     },
+    computed: {
+        constants() {
+            return constants;
+        }
+    }
 }
 
 
@@ -47,27 +50,27 @@ export default {
 
 
 <template>
-    <div class="container custom-style">
+    <header class="container custom-style">
         <div class="logo">
             <img class="logo-icon" src="../../assets/icons/header/logo.svg" alt="logo icon">
         </div>
         <nav class="menu">
             <div :class="(element.isBold === false) ? 'menu__element' : 'menu__element-bold'"
                 v-for="(element, index) in HEADER_MENU" :key="index" @click="element.action">
-                {{ element.name }}
+                <a>{{ element.name }}</a>
             </div>
         </nav>
         <div class="user-data">
             <div class="user-data__language">
                 <img src="../../assets/icons/header/language.svg" alt="language">
-                <span>{{ LANGUAGE }}</span>
+                <span>{{ constants.LANGUAGE }}</span>
             </div>
             <div class="user-data__score">
                 <img src="../../assets/icons/header/coins.svg" alt="language">
-                <span>{{ NUMBER }}</span>
+                <span>{{ constants.NUMBER }}</span>
             </div>
         </div>
-    </div>
+    </header>
 </template>
 
 

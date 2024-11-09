@@ -3,13 +3,15 @@
 </template>
 
 <script>
+import constants from '../constants/partners.json'
 export default {
+    computed: {
+        constants() {
+            return constants;
+        }
+    }
 
 }
-const H2_TEXT = "Нас поддерживают"
-const SMALL_TEXT = "Получите свободу, благодаря конфиденциальным, глобальным цифровым деньгам. Становитесь своим собственным банком с полным контролем над своими цифровыми активами."
-const PLACEHOLDER = "Swap to see more"
-const TIPS = "TIPS"
 
 </script>
 

@@ -1,66 +1,36 @@
 <script>
+import constants from '../constants/instructions.json'
 export default {
-    setup() {
-
-        const H2_TEXT_1 = "Готовы начать?"
-        const SMALL_TEXT_1 = "Независимо от того, являетесь ли вы разработчиком, мерчантом, конечным пользователем или покупателем окон, мы приветствуем вас в сообществе BTCA."
-        const H2_TEXT_2 = "Никогда не пропускайте обновления"
-        const SMALL_TEXT_2 = "Подпишитесь на информационный бюллетень\nи будьте первым, кто получит новейшие оповещения, объявления\nи обновления о разработках BTCA."
-        const BUTTON_TEXT = "Подписаться"
-        const EMAIL_PLACEHOLDER = "Ваш e-mail"
-        const INSTRUCTIONS = [
-            {
-                step_index: "1",
-                step: "шаг",
-                text: "Скачайте\nприложение",
-                src: new URL('../../assets/images/instruction1.png', import.meta.url).href,
-                alt: 'image',
-            },
-            {
-                step_index: "2",
-                step: "шаг",
-                text: "Регистрируйтесь",
-                src: new URL('../../assets/images/instruction2.png', import.meta.url).href,
-                alt: 'image',
-            },
-            {
-                step_index: "3",
-                step: "шаг",
-                text: "Пользуйтесь",
-                src: new URL('../../assets/images/instruction3.png', import.meta.url).href,
-                alt: 'image',
-            },
-        ]
-
-        return {
-            H2_TEXT_1,
-            SMALL_TEXT_1,
-            H2_TEXT_2,
-            SMALL_TEXT_2,
-            BUTTON_TEXT,
-            EMAIL_PLACEHOLDER,
-            INSTRUCTIONS
-        };
+    computed: {
+        constants() {
+            return constants;
+        }
     },
+    methods: {
+        getURL(src) {
+            return new URL(src, import.meta.url).href
+        }
+    }
 
 }
 
 
 </script>
 
+
 <template>
     <div class="container custom-style">
         <div class="text-block">
             <div class="text-block__h2">
-                <h2>{{ H2_TEXT_1 }}</h2>
+                <h2>{{ constants.H2_TEXT_1 }}</h2>
             </div>
             <div class="text-block__text">
-                <p>{{ SMALL_TEXT_1 }}</p>
+                <p>{{ constants.SMALL_TEXT_1 }}</p>
             </div>
         </div>
         <div class="instructions">
-            <div class="instruction" v-for="(item, index) in INSTRUCTIONS" :key="index"
-                :style="{ backgroundImage: `url(${item.src})`, alt: `${item.alt}` }">
+            <div class="instruction" v-for="(item, index) in constants.INSTRUCTIONS" :key="index"
+                :style="{ backgroundImage: `url(${getURL(item.src)})`, alt: `${item.alt}` }">
                 <div class="instruction__header">
                     <span class="step_index"> {{ item.step_index }}</span>
                     <span class="step">{{ item.step }}</span>
@@ -69,22 +39,20 @@ export default {
                 <h3 class="instruction__h3">
                     {{ item.text }}
                 </h3>
-                <div class="instruction__picture">
-
-                </div>
             </div>
         </div>
         <form class="subsribe-banner">
             <div class="subsribe-banner__h2">
-                <h2>{{ H2_TEXT_2 }}</h2>
+                <h2>{{ constants.H2_TEXT_2 }}</h2>
             </div>
             <div class="subsribe-banner__text">
-                <p>{{ SMALL_TEXT_2 }}</p>
+                <p>{{ constants.SMALL_TEXT_2 }}</p>
             </div>
             <div class="input-field">
-                <input type="email" name="email" id="email" required :placeholder="{EMAIL_PLACEHOLDER}">
+                <input type="email" name="email" id="email" required
+                    :placeholder="constants.EMAIL_PLACEHOLDER">
                 <button class="subscribe-button">
-                    <span>{{ BUTTON_TEXT }}</span>
+                    <span>{{ constants.BUTTON_TEXT }}</span>
                 </button>
             </div>
         </form>
@@ -178,7 +146,7 @@ export default {
     white-space: pre-line;
 }
 
-.subsribe-banner{
+.subsribe-banner {
     padding-top: 7.5rem;
     padding-left: 5.4rem;
     margin-top: 3.2rem;
@@ -191,7 +159,7 @@ export default {
     background-position: center;
 }
 
-.subsribe-banner__h2{
+.subsribe-banner__h2 {
     @include text(h2);
     background: linear-gradient(91.92deg, $white 29.24%, rgba(176, 250, 255, 0) 131.64%);
     color: transparent;
@@ -200,7 +168,7 @@ export default {
     margin-bottom: 1.6rem;
 }
 
-.subsribe-banner__text{
+.subsribe-banner__text {
     @include text(p);
     color: rgba($color: $white, $alpha: 0.8);
     white-space: pre-line;
@@ -208,7 +176,7 @@ export default {
 }
 
 
-.subscribe-button{
+.subscribe-button {
     box-shadow: 0px 4px 16px 0px #00FFA342;
     background: $subscribeButton;
     border-radius: 6.6rem;
@@ -216,10 +184,8 @@ export default {
     width: 16.8rem;
 }
 
-.subscribe-button span{
+.subscribe-button span {
     @include text(button);
     color: $white;
 }
-
-
 </style>
