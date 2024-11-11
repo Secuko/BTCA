@@ -56,6 +56,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin-left: 3.7rem;
+    z-index: $header-menu-z-index;
 }
 
 .menu__element,
@@ -77,6 +78,7 @@ export default {
     flex-direction: row;
     gap: 1rem;
     margin-left: 39.1rem;
+    z-index: $header-user-data-z-index;
 }
 
 .user-data__language,
@@ -91,6 +93,11 @@ export default {
 
 .user-data__language {
     width: 7.6rem;
+
+    &:hover{
+        cursor: pointer;
+        background: #000;
+    }
 }
 
 //нужно убрать по идее
@@ -129,5 +136,12 @@ span {
     color: $white;
     margin-left: 0.9rem;
     margin-right: 1rem;
+}
+
+a{
+    &:hover{
+        cursor: pointer;
+        color: $white;
+    }
 }
 </style>

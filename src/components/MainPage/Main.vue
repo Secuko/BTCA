@@ -92,13 +92,13 @@ export default {
 }
 
 .earth-image {
-    z-index: 10;
+    z-index: $earth-z-index;
     right: 0;
     top: -6.8rem
 }
 
 .coins-image {
-    z-index: 100;
+    z-index: $coins-z-index;
     right: 17.7rem;
     top: 17.7rem
 }

@@ -13,8 +13,6 @@ export default {
     }
 }
 
-
-
 </script>
 
 <template>
@@ -24,9 +22,9 @@ export default {
                 <div class="links">
                     <div class="links__site-links">
                         <div class="links-column" v-for="(column, columnIndex) in constants.LINKS" key="columnIndex"
-                            :style="{ marginRight: `${column.MARGIN_RIGHT}`}">
+                            :style="{ marginRight: `${column.MARGIN_RIGHT}` }">
                             <h4 class="links-column__header">
-                                <span>{{ column.HEADER_NAME }}</span>
+                                {{ column.HEADER_NAME }}
                             </h4>
                             <ul class="links-column__list">
                                 <li class="link" v-for="(link, linkIndex) in column.LINKS" key="linkIndex">
@@ -49,8 +47,7 @@ export default {
                                 <p>{{ constants.ASIDE_TEXT }}</p>
                             </div>
                             <div class="other-info__resourses-links">
-                                <a v-for="(item, socialIndex) in constants.SOCIAL_LINKS" :key="socialIndex"
-                                    href="">
+                                <a v-for="(item, socialIndex) in constants.SOCIAL_LINKS" :key="socialIndex" href="">
                                     <img class="social_icon" :src="getURL(item.src)" :alt="item.alt">
                                 </a>
                             </div>
@@ -174,5 +171,12 @@ export default {
 .social_icon {
     width: 3.2rem;
     height: 3.2rem;
+}
+
+a{
+    &:hover{
+        cursor: pointer;
+        color: $white;
+    }
 }
 </style>

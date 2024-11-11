@@ -1,5 +1,31 @@
 {
     "H2_TEXT": "Кошелек и Инструменты",
     "SMALL_TEXT": "BTCA предоставляет вам инструменты и ресурсы, чтобы вы всегда могли контролировать свои средства.",
-    "BUTTON_TEXT": "Скачать кошелек"
+    "BUTTON_TEXT": "Скачать кошелек",
+    "TECHNOLOGIES": [
+        {
+            "src": "../../assets/icons/footer/tech/android.svg",
+            "alt": "android",
+            "width": "2.975rem",
+            "height": "3.4rem"
+        },
+        {
+            "src": "../../assets/icons/footer/tech/apple.svg",
+            "alt": "apple",
+            "width": "2.56rem",
+            "height": "3.2rem"
+        },
+        {
+            "src": "../../assets/icons/footer/tech/linux.svg",
+            "alt": "linux",
+            "width": "3.2rem",
+            "height": "3.2rem"
+        },
+        {
+            "src": "../../assets/icons/footer/tech/windows.svg",
+            "alt": "windows",
+            "width": "3.4rem",
+            "height": "3.4rem"
+        }
+    ]
 }

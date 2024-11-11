@@ -36,9 +36,9 @@ export default {
                     <span class="step">{{ item.step }}</span>
                     <div class="separated-line"></div>
                 </div>
-                <h3 class="instruction__h3">
-                    {{ item.text }}
-                </h3>
+                <div class="instruction__h3">
+                    <h3>{{ item.text }}</h3>
+                </div>
             </div>
         </div>
         <form class="subsribe-banner">
@@ -49,8 +49,7 @@ export default {
                 <p>{{ constants.SMALL_TEXT_2 }}</p>
             </div>
             <div class="input-field">
-                <input type="email" name="email" id="email" required
-                    :placeholder="constants.EMAIL_PLACEHOLDER">
+                <input type="email" name="email" id="email" required :placeholder="constants.EMAIL_PLACEHOLDER">
                 <button class="subscribe-button">
                     <span>{{ constants.BUTTON_TEXT }}</span>
                 </button>
@@ -182,10 +181,45 @@ export default {
     border-radius: 6.6rem;
     height: 4.9rem;
     width: 16.8rem;
+
+    &:hover{
+        border: 0.1rem solid $white;
+    }
 }
 
 .subscribe-button span {
     @include text(button);
     color: $white;
+}
+
+.input-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 66.1rem;
+    height: 6.4rem;
+    background: #FFFFFF1A;
+    padding: 0rem 1.2rem 0rem 3.1rem;
+    border-radius: 1.4rem;
+    border: 1px solid;
+    backdrop-filter: blur(4px);
+    box-shadow: 0px 0.4rem 4.1rem 0rem #00000021;
+    border-image-source: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(0, 0, 0, 0) 100%);
+}
+
+input{
+    @include text(body2);
+    color: $white;
+    width: 40.0rem;
+}
+
+h3,
+h2,
+p {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
 }
 </style>
