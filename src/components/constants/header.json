@@ -1,4 +1,30 @@
 {
     "LANGUAGE": "RUS",
-    "NUMBER": "10.834"
+    "NUMBER": "10.834",
+    "HEADER_MENU": [
+        {
+            "name": "Функции",
+            "isBold": false
+        },
+        {
+            "name": "Кошельки",
+            "isBold": false
+        },
+        {
+            "name": "Участие",
+            "isBold": false
+        },
+        {
+            "name": "Ресурсы",
+            "isBold": false
+        },
+        {
+            "name": "Новости",
+            "isBold": false
+        },
+        {
+            "name": "О BTCA",
+            "isBold": true
+        }
+    ]
 }

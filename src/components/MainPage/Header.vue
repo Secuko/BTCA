@@ -2,42 +2,6 @@
 
 import constants from '../constants/header.json'
 export default {
-    data() {
-        return {
-            HEADER_MENU: [
-                {
-                    name: "Функции",
-                    action: () => { console.log("Функции") },
-                    isBold: false,
-                },
-                {
-                    name: "Кошельки",
-                    action: () => { console.log("Кошельки") },
-                    isBold: false,
-                },
-                {
-                    name: "Участие",
-                    action: () => { console.log("Участие") },
-                    isBold: false,
-                },
-                {
-                    name: "Ресурсы",
-                    action: () => { console.log("Ресурсы") },
-                    isBold: false,
-                },
-                {
-                    name: "Новости",
-                    action: () => { console.log("Новости") },
-                    isBold: false,
-                },
-                {
-                    name: "О BTCA",
-                    action: () => { console.log("О BTCA") },
-                    isBold: true,
-                },
-            ]
-        };
-    },
     computed: {
         constants() {
             return constants;
@@ -50,13 +14,13 @@ export default {
 
 
 <template>
-    <header class="container custom-style">
+    <header class="container header">
         <div class="logo">
             <img class="logo-icon" src="../../assets/icons/header/logo.svg" alt="logo icon">
         </div>
         <nav class="menu">
-            <div :class="(element.isBold === false) ? 'menu__element' : 'menu__element-bold'"
-                v-for="(element, index) in HEADER_MENU" :key="index" @click="element.action">
+            <div :class="['menu__element', { 'menu__element-bold': element.isBold }]"
+                v-for="(element, index) in constants.HEADER_MENU" :key="index">
                 <a>{{ element.name }}</a>
             </div>
         </nav>
@@ -74,14 +38,14 @@ export default {
 </template>
 
 
-<style lang="scss">
-.container.custom-style {
+<style lang="scss" scoped>
+.header {
     display: flex;
     flex-direction: row;
     height: 6.8rem;
     align-items: center;
     background: linear-gradient(267.43deg, rgba(0, 255, 163, 0.12) 36.58%, rgba(31, 26, 255, 0.2) 80.91%);
-    box-shadow: 0px 4px 40px 0px #0000000D;
+    box-shadow: 0rem 0.4rem 4rem 0rem #0000000D;
 }
 
 .menu {

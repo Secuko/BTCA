@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-    <div class="container custom-style">
+    <main class="container main">
         <img src="../../assets/images/earth.png" alt="earth" class="earth-image">
         <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
         <div class="main-text">
@@ -72,14 +72,14 @@ export default {
                 </button>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 
 <style lang="scss" scoped>
-.container.custom-style {
+.main {
     position: relative;
     background-image: url('../../assets/images/main-background.png');
-    height: 1240px;
+    height: 124rem;
     display: flex;
     flex-direction: column;
     justify-content: end;
