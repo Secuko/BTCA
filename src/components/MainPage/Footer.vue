@@ -173,10 +173,9 @@ export default {
     height: 3.2rem;
 }
 
-a{
-    &:hover{
-        cursor: pointer;
-        color: $white;
-    }
+a:hover{
+    color: $white
 }
+
+
 </style>

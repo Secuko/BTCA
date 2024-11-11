@@ -1,32 +1,72 @@
 <script>
+import Swiper from 'swiper';
 import constants from '../constants/main.json';
+import SliderCard from './common/SliderCard.vue';
 export default {
-
+    components: { SliderCard },
     data() {
         return {
-            BUTTON_DATA: [
-                {
-                    src: "../../assets/icons/common/left_arrow.svg",
-                    action: () => { console.log("left-click") },
-                    alt: 'left_arrow',
-                },
-                {
-                    src: "../../assets/icons/common/right_arrow.svg",
-                    action: () => { console.log("right-click") },
-                    alt: 'right_arrow',
-                }
-            ],
-
+            // BUTTON_DATA: [
+            //     {
+            //         src: "../../assets/icons/common/left_arrow.svg",
+            //         action: () => { console.log("left-click") },
+            //         alt: 'left_arrow',
+            //     },
+            //     {
+            //         src: "../../assets/icons/common/right_arrow.svg",
+            //         action: () => { console.log("right-click") },
+            //         alt: 'right_arrow',
+            //     }
+            // ],
+            activeIndex: 1,
+            slider: null,
+            loop: true,
         };
+    },
+    mounted() {
+        this.initSwiper();
     },
     computed: {
         constants() {
             return constants;
+        },
+        isEnd() {
+            return this.activeIndex === constants.SLIDER_DATA.length - 1;
+        },
+        isStart() {
+            return this.activeIndex === 0;
+        }
+    },
+    methods: {
+        initSwiper() {
+            this.slider = new Swiper(this.$refs.swiperEl, {
+                slidesPerView: 3,
+                spaceBetween: 25,
+                centeredSlides: true,
+                initialSlide: 1,
+            });
+            this.slider?.on('slideChange', swiper => {
+                this.activeIndex = swiper.activeIndex;
+            });
+        },
+        clickNextSlide() {
+            this.slider.slideNext();
+        },
+        clickPrevSlide() {
+            this.slider.slidePrev();
+        },
+        clickCard(index) {
+            if (this.activeIndex < index) {
+                this.slider.slideNext();
+            } else {
+                this.slider.slidePrev();
+            }
         }
     }
 }
 
 </script>
+
 
 <template>
     <main class="container main">
@@ -40,42 +80,91 @@ export default {
                 <p>{{ constants.SMALL_TEXT }}</p>
             </div>
         </div>
-        <div class="slider">
-            <div class="slider__items">
-                <div class="slider-item " v-for="(item, index) in constants.SLIDER_DATA" :key="index">
-                    <div class="blur-layer"></div>
-                    <div class="item-body">
-                        <p class="item-body__header-text">
-                            {{ item.header_text }}
-                        </p>
-                        <h3 class="item-body__h3-text">
-                            {{ item.h3_text }}
-                        </h3>
-                        <p class="item-body__small-text">
-                            {{ item.small_text }}
-                        </p>
-                        <button class="item-button">
-                            <span class="item-button_text">
-                                {{ item.button_text }}
-                            </span>
-                        </button>
-                    </div>
-                </div>
+        <div ref="swiperEl" class="swiper">
+            <div class="swiper-wrapper">
+                <SliderCard :key="index" v-for="(card, index) in constants.SLIDER_DATA" :card="card"
+                    class="swiper-slide" :active="this.activeIndex === index" @click="clickCard(index)" />
             </div>
-            <div class="slider__buttons">
-                <button class="slider-button">
-                    <!-- <img class="slider-button__icon" :src="(index === 0) ? '../../assets/icons/common/left_arrow.svg' : '../../assets/icons/common/right_arrow.svg'" :alt="item.alt"> -->
-                    <img class="slider-button__icon" src="../../assets/icons/common/left_arrow.svg" alt="left">
-                </button>
-                <button class="slider-button">
-                    <img class="slider-button__icon" src="../../assets/icons/common/right_arrow.svg" alt="right">
-                </button>
-            </div>
+        </div>
+        <div class="navigation">
+            <button class="navigation__btn" :class="{ 'disabled': isStart }" @click="clickPrevSlide">
+                <img src="../../assets/icons/common/left_arrow.svg" />
+            </button>
+            <button class="navigation__btn" :class="{ 'disabled': isEnd }" @click="clickNextSlide">
+                <img src="../../assets/icons/common/right_arrow.svg" />
+            </button>
         </div>
     </main>
 </template>
 
 <style lang="scss" scoped>
+.swiper {
+    width: 100%;
+    height: 60rem;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    padding: 0 20px;
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+}
+
+.navigation__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: $white;
+    cursor: pointer;
+    border: 1px solid rgba($white, 0.11);
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+
+    &:hover {
+        border: 1px solid rgba($white, 0.8);
+    }
+}
+
+
+.navigation__btn.disabled {
+    cursor: not-allowed;
+    opacity: .5;
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        border: 1px solid rgba($white, 0.11);
+    }
+}
+
+.img {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 .main {
     position: relative;
     background-image: url('../../assets/images/main-background.png');
@@ -242,3 +331,36 @@ p {
     }
 }
 </style>
+
+
+<!-- <div class="slider">
+    <div class="slider__items">
+        <div class="slider-item " v-for="(item, index) in constants.SLIDER_DATA" :key="index">
+            <div class="blur-layer"></div>
+            <div class="item-body">
+                <p class="item-body__header-text">
+                    {{ item.header_text }}
+                </p>
+                <h3 class="item-body__h3-text">
+                    {{ item.h3_text }}
+                </h3>
+                <p class="item-body__small-text">
+                    {{ item.small_text }}
+                </p>
+                <button class="item-button">
+                    <span class="item-button_text">
+                        {{ item.button_text }}
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="slider__buttons">
+        <button class="slider-button">
+            <img class="slider-button__icon" src="../../assets/icons/common/left_arrow.svg" alt="left">
+        </button>
+        <button class="slider-button">
+            <img class="slider-button__icon" src="../../assets/icons/common/right_arrow.svg" alt="right">
+        </button>
+    </div>
+</div> -->
