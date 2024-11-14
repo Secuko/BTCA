@@ -4,6 +4,11 @@ export default {
     computed: {
         constants() {
             return constants;
+        },
+    },
+    methods:{
+        getURL(src) {
+            return new URL(src, import.meta.url).href
         }
     }
 
@@ -32,8 +37,10 @@ export default {
                             <span>{{ constants.PLACEHOLDER }}</span>
                         </div>
                     </div>
-                    <div class="rotate-icon">
-                        <img src="../../assets/icons/common/rotate-tool.svg" alt="rotate-icon"/>
+                    <div class="rotate-icon-wrapper">
+                        <svg class="rotate-icon" width="3.7rem" height="3.7rem">
+                            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ROTATE}`"></use>
+                        </svg>
                     </div>
                 </div>
             </div>

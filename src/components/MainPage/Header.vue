@@ -6,6 +6,11 @@ export default {
         constants() {
             return constants;
         }
+    },
+    methods: {
+        getURL(src) {
+            return new URL(src, import.meta.url).href
+        }
     }
 }
 
@@ -15,9 +20,9 @@ export default {
 
 <template>
     <header class="container header">
-        <div class="logo">
-            <img class="logo-icon" src="../../assets/icons/header/logo.svg" alt="logo icon">
-        </div>
+        <svg class="logo-icon" width="4.2rem" height="4.2rem">
+            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_LOGO}`"></use>
+        </svg>
         <nav class="menu">
             <div :class="['menu__element', { 'menu__element-bold': element.isBold }]"
                 v-for="(element, index) in constants.HEADER_MENU" :key="index">
@@ -26,11 +31,17 @@ export default {
         </nav>
         <div class="user-data">
             <div class="user-data__language">
-                <img src="../../assets/icons/header/language.svg" alt="language">
+                <!-- <img src="../../assets/icons/header/language.svg" alt="language"> -->
+                <!-- <use :href="`${getURL(constants.SPRITE_PATH)}#icon-android`"></use> -->
+                <svg class="language-icon" width="1.5rem" height="1.6rem">
+                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_LANGUAGE}`"></use>
+                </svg>
                 <span>{{ constants.LANGUAGE }}</span>
             </div>
             <div class="user-data__score">
-                <img src="../../assets/icons/header/coins.svg" alt="language">
+                <svg class="coin-icon" width="2.0rem" height="2.0rem">
+                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_COIN}`"></use>
+                </svg>
                 <span>{{ constants.NUMBER }}</span>
             </div>
         </div>
@@ -88,13 +99,15 @@ export default {
     height: 3.3rem;
     background-color: rgba($white, 0.15);
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 .user-data__language {
     width: 7.6rem;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
         background: #000;
     }
@@ -138,8 +151,8 @@ span {
     margin-right: 1rem;
 }
 
-a{
-    &:hover{
+a {
+    &:hover {
         cursor: pointer;
         color: $white;
     }

@@ -4,6 +4,9 @@ export default {
     computed: {
         constants() {
             return constants;
+        },
+        sprite() {
+            return sprite;
         }
     },
     methods: {
@@ -39,8 +42,9 @@ export default {
                             <div class="other-info__technologies">
                                 <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex"
                                     href="">
-                                    <img class="tech_icon" :src="getURL(item.src)" :alt="item.alt"
-                                        :style="{ width: `${item.width}`, height: `${item.height}` }">
+                                    <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
+                                        <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>
+                                    </svg>
                                 </a>
                             </div>
                             <div class="other-info__aside-text">
@@ -48,7 +52,9 @@ export default {
                             </div>
                             <div class="other-info__resourses-links">
                                 <a v-for="(item, socialIndex) in constants.SOCIAL_LINKS" :key="socialIndex" href="">
-                                    <img class="social_icon" :src="getURL(item.src)" :alt="item.alt">
+                                    <svg class="icon" width="3.2rem" height="3.2rem">
+                                        <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`" />
+                                    </svg>
                                 </a>
                             </div>
                         </div>
@@ -173,9 +179,7 @@ export default {
     height: 3.2rem;
 }
 
-a:hover{
+a:hover {
     color: $white
 }
-
-
 </style>

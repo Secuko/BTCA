@@ -6,21 +6,8 @@ export default {
     components: { SliderCard },
     data() {
         return {
-            // BUTTON_DATA: [
-            //     {
-            //         src: "../../assets/icons/common/left_arrow.svg",
-            //         action: () => { console.log("left-click") },
-            //         alt: 'left_arrow',
-            //     },
-            //     {
-            //         src: "../../assets/icons/common/right_arrow.svg",
-            //         action: () => { console.log("right-click") },
-            //         alt: 'right_arrow',
-            //     }
-            // ],
             activeIndex: 1,
             slider: null,
-            loop: true,
         };
     },
     mounted() {
@@ -61,6 +48,9 @@ export default {
             } else {
                 this.slider.slidePrev();
             }
+        },
+        getURL(src) {
+            return new URL(src, import.meta.url).href
         }
     }
 }
@@ -88,10 +78,16 @@ export default {
         </div>
         <div class="navigation">
             <button class="navigation__btn" :class="{ 'disabled': isStart }" @click="clickPrevSlide">
-                <img src="../../assets/icons/common/left_arrow.svg" />
+                <!-- <img src="../../assets/icons/common/left_arrow.svg" /> -->
+                <svg class="button-arrow left-arrow" width="2.4rem" height="2.4rem">
+                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
+                </svg>
             </button>
             <button class="navigation__btn" :class="{ 'disabled': isEnd }" @click="clickNextSlide">
-                <img src="../../assets/icons/common/right_arrow.svg" />
+                <!-- <img src="../../assets/icons/common/right_arrow.svg" /> -->
+                <svg class="button-arrow" width="2.4rem" height="2.4rem">
+                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
+                </svg>
             </button>
         </div>
     </main>
@@ -107,6 +103,14 @@ export default {
 .swiper-wrapper {
     display: flex;
     flex-direction: row;
+}
+
+.button-arrow{
+    fill: $white
+}
+
+.left-arrow{
+    rotate: 180deg;
 }
 
 .navigation {
@@ -132,9 +136,15 @@ export default {
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
+    --icon-fill-color: $white;
 
     &:hover {
         border: 1px solid rgba($white, 0.8);
+        --icon-fill-color: red;
+
+        .button-arrow {
+            fill: var(--icon-fill-color);
+        }
     }
 }
 

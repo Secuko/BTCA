@@ -3,5 +3,7 @@
     "SMALL_TEXT": "Получите свободу, благодаря конфиденциальным, глобальным цифровым деньгам. Становитесь своим собственным банком с полным контролем над своими цифровыми активами.",
     "PLACEHOLDER": "Swap to see more",
     "TIPS": "TIPS",
-    "BG_TEXT": "ПАРТНЕРЫ"
+    "BG_TEXT": "ПАРТНЕРЫ",
+    "SPRITE_PATH": "../../assets/icons/sprite.svg",
+    "ICON_ROTATE": "icon-rotate"
 }

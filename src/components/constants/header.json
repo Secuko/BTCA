@@ -1,6 +1,10 @@
 {
     "LANGUAGE": "RUS",
     "NUMBER": "10.834",
+    "SPRITE_PATH": "../../assets/icons/sprite.svg",
+    "ICON_LOGO": "icon-logo",
+    "ICON_LANGUAGE": "icon-language",
+    "ICON_COIN": "icon-coin",
     "HEADER_MENU": [
         {
             "name": "Функции",

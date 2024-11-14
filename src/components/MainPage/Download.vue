@@ -31,14 +31,19 @@ export default {
                 </div>
                 <div class="links">
                     <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex" href="">
-                        <img class="tech_icon" :src="getURL(item.src)" :alt="item.alt"
-                            :style="{ width: `${item.width}`, height: `${item.height}` }">
+                        <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
+                            <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>/>
+                        </svg>
                     </a>
                 </div>
-                <div class="download-button">
-                    <img src="../../assets/icons/common/apple-icon.svg" alt="apple-icon" class="button-icon">
+                <button class="download-button">
+                    <div class="download-button__icon-wrapper">
+                        <svg class="apple-icon" width="1.6rem" height="2.0rem">
+                            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_APPLE}`" />
+                        </svg>
+                    </div>
                     <span>{{ constants.BUTTON_TEXT }}</span>
-                </div>
+                </button>
             </div>
             <div class="image">
                 <img src="../../assets/images/ipad_iphone.png" alt="ipad_iphone">
@@ -50,6 +55,10 @@ export default {
 <style lang="scss" scoped>
 .container {
     background-image: url('../../assets/images/download-background.png');
+}
+
+.apple-icon{
+    fill: #8886FF;
 }
 
 .section-content-wrapper {
@@ -97,8 +106,6 @@ export default {
     align-items: center;
     background: $blue26;
     color: $downloadButtonText;
-    display: flex;
-    flex-direction: row;
     gap: 1.6rem;
     @include text(button);
 
@@ -106,6 +113,14 @@ export default {
         border: 0.1rem solid $white;
         cursor: pointer;
     }
+}
+
+.download-button__icon-wrapper{
+    width: 2.4rem;
+    height: 2.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-icon {
