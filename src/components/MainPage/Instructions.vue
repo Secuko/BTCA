@@ -176,7 +176,7 @@ export default {
 
 
 .subscribe-button {
-    box-shadow: 0px 4px 16px 0px #00FFA342;
+    box-shadow: 0 0.4rem 1.6rem 0 #00FFA342;
     background: $subscribeButton;
     border-radius: 6.6rem;
     height: 4.9rem;
@@ -202,9 +202,9 @@ export default {
     background: #FFFFFF1A;
     padding: 0rem 1.2rem 0rem 3.1rem;
     border-radius: 1.4rem;
-    border: 1px solid;
-    backdrop-filter: blur(4px);
-    box-shadow: 0px 0.4rem 4.1rem 0rem #00000021;
+    border: 0.1rem solid;
+    backdrop-filter: blur(0.4rem);
+    box-shadow: 0 0.4rem 4.1rem 0rem #00000021;
     border-image-source: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(0, 0, 0, 0) 100%);
 }
 

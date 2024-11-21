@@ -26,19 +26,24 @@ body {
   background-color: $mainBg;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: Hauora;
 }
 
-// @media (max-width: 1440px) {
-//   html {
-//       font-size: .6944444444vw;
-//   }
-// }
+html {
+  font-size: 10px;
+}
 
-// @media (max-width: 1920.98px) {
-//   html {
-//       font-size: calc(6px + .27778vw);
-//   }
-// }
+@media (max-width: 1440px) {
+  html {
+    font-size: .6944444444vw;
+  }
+}
+
+@media (max-width: 1920.98px) {
+  html {
+    font-size: calc(6px + .27778vw);
+  }
+}
 
 /* Убираем стили у заголовков */
 h1,
@@ -93,6 +98,10 @@ select {
   max-width: 144rem;
   margin: 0 auto;
   padding: 0 8rem;
+}
+
+a {
+  transition: .4s ease-in-out;
 }
 
 // @font-face {

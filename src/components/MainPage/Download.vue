@@ -1,5 +1,6 @@
 <script>
 import constants from '../constants/download.json'
+import Icon from './common/Icon.vue';
 export default {
     computed: {
         constants() {
@@ -10,6 +11,9 @@ export default {
         getURL(src) {
             return new URL(src, import.meta.url).href
         }
+    },
+    components: {
+        Icon
     }
 }
 
@@ -18,53 +22,57 @@ export default {
 
 
 <template>
-    <section class="container">
-        <div class="section-content-wrapper">
-            <div class="content">
-                <div class="content__h2">
-                    <h2>{{ constants.H2_TEXT }}</h2>
-                </div>
-                <div class="content__p">
-                    <p>
-                        {{ constants.SMALL_TEXT }}
-                    </p>
-                </div>
-                <div class="links">
-                    <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex" href="">
-                        <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
-                            <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>/>
-                        </svg>
-                    </a>
-                </div>
-                <button class="download-button">
-                    <div class="download-button__icon-wrapper">
-                        <svg class="apple-icon" width="1.6rem" height="2.0rem">
-                            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_APPLE}`" />
-                        </svg>
+    <section class="download">
+        <div class="container">
+            <div class="section-content-wrapper">
+                <div class="content">
+                    <div class="content__h2">
+                        <h2>{{ constants.H2_TEXT }}</h2>
                     </div>
-                    <span>{{ constants.BUTTON_TEXT }}</span>
-                </button>
-            </div>
-            <div class="image">
-                <img src="../../assets/images/ipad_iphone.png" alt="ipad_iphone">
+                    <div class="content__p">
+                        <p>
+                            {{ constants.SMALL_TEXT }}
+                        </p>
+                    </div>
+                    <div class="links">
+                        <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex" href="">
+                            <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
+                                <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>/>
+                            </svg>
+                        </a>
+                    </div>
+                    <button class="download-button">
+                        <!-- <svg class="apple-icon" width="1.6rem" height="2.0rem">
+                            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_APPLE}`" />
+                        </svg> -->
+                        <Icon :iconHeight="'2.0rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_APPLE"
+                            :spritePath="constants.SPRITE_PATH" />
+                        <span>{{ constants.BUTTON_TEXT }}</span>
+                    </button>
+                </div>
+                <div class="image">
+                    <img src="../../assets/images/ipad_iphone.png" alt="ipad_iphone">
+                </div>
             </div>
         </div>
     </section>
 </template>
 
 <style lang="scss" scoped>
-.container {
+.download {
+    width: 100%;
+    background-size: cover;
     background-image: url('../../assets/images/download-background.png');
 }
 
-.apple-icon{
+.apple-icon {
     fill: #8886FF;
 }
 
 .section-content-wrapper {
     position: relative;
     height: 61.1rem;
-    padding:12.7rem 8.5rem;
+    padding: 12.7rem 8.5rem;
 }
 
 .content {
@@ -89,14 +97,14 @@ export default {
 }
 
 .links {
-    margin-top:4.0rem;
+    margin-top: 4.0rem;
     display: flex;
     flex-direction: row;
     gap: 2.4rem;
 }
 
 .download-button {
-    margin-top:3.2rem;
+    margin-top: 3.2rem;
     width: 22.6rem;
     height: 5.2rem;
     border-radius: 1.2rem;
@@ -109,18 +117,10 @@ export default {
     gap: 1.6rem;
     @include text(button);
 
-    &:hover{
+    &:hover {
         border: 0.1rem solid $white;
         cursor: pointer;
     }
-}
-
-.download-button__icon-wrapper{
-    width: 2.4rem;
-    height: 2.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .button-icon {
@@ -128,13 +128,15 @@ export default {
     height: 2rem;
 }
 
-.image{
-    position:absolute;
+.image {
+    position: absolute;
     right: 8.1rem;
     top: 8.4rem;
 }
 
-h3,h2,p {
+h3,
+h2,
+p {
     font-size: inherit;
     font-weight: inherit;
     line-height: inherit;

@@ -54,46 +54,50 @@ export default {
         }
     }
 }
-
 </script>
 
 
 <template>
-    <main class="container main">
-        <img src="../../assets/images/earth.png" alt="earth" class="earth-image">
-        <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
-        <div class="main-text">
-            <div class="main-text__h1-wrapper">
-                <h1>{{ constants.H1_TEXT }}</h1>
+    <main class="main">
+        <div class="container">
+            <img src="../../assets/images/earth.png" alt="earth" class="earth-image">
+            <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
+            <div class="main-text-wrapper">
+                <div class="main-text">
+                    <div class="main-text__h1-wrapper">
+                        <h1>{{ constants.H1_TEXT }}</h1>
+                    </div>
+                    <div class="main-text__p-wrapper">
+                        <p>{{ constants.SMALL_TEXT }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="main-text__p-wrapper">
-                <p>{{ constants.SMALL_TEXT }}</p>
+            <div ref="swiperEl" class="swiper">
+                <div class="swiper-wrapper">
+                    <SliderCard :key="index" v-for="(card, index) in constants.SLIDER_DATA" :card="card"
+                        class="swiper-slide" :active="this.activeIndex === index" @click="clickCard(index)" />
+                </div>
             </div>
-        </div>
-        <div ref="swiperEl" class="swiper">
-            <div class="swiper-wrapper">
-                <SliderCard :key="index" v-for="(card, index) in constants.SLIDER_DATA" :card="card"
-                    class="swiper-slide" :active="this.activeIndex === index" @click="clickCard(index)" />
+            <div class="navigation">
+                <button class="navigation__btn" :class="{ 'disabled': isStart }" @click="clickPrevSlide">
+                    <!-- <img src="../../assets/icons/common/left_arrow.svg" /> -->
+                    <svg class="button-arrow left-arrow" width="2.4rem" height="2.4rem">
+                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
+                    </svg>
+                </button>
+                <button class="navigation__btn" :class="{ 'disabled': isEnd }" @click="clickNextSlide">
+                    <!-- <img src="../../assets/icons/common/right_arrow.svg" /> -->
+                    <svg class="button-arrow" width="2.4rem" height="2.4rem">
+                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
+                    </svg>
+                </button>
             </div>
-        </div>
-        <div class="navigation">
-            <button class="navigation__btn" :class="{ 'disabled': isStart }" @click="clickPrevSlide">
-                <!-- <img src="../../assets/icons/common/left_arrow.svg" /> -->
-                <svg class="button-arrow left-arrow" width="2.4rem" height="2.4rem">
-                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
-                </svg>
-            </button>
-            <button class="navigation__btn" :class="{ 'disabled': isEnd }" @click="clickNextSlide">
-                <!-- <img src="../../assets/icons/common/right_arrow.svg" /> -->
-                <svg class="button-arrow" width="2.4rem" height="2.4rem">
-                    <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
-                </svg>
-            </button>
         </div>
     </main>
 </template>
 
 <style lang="scss" scoped>
+
 .swiper {
     width: 100%;
     height: 60rem;
@@ -105,20 +109,20 @@ export default {
     flex-direction: row;
 }
 
-.button-arrow{
+.button-arrow {
     fill: $white
 }
 
-.left-arrow{
+.left-arrow {
     rotate: 180deg;
 }
 
 .navigation {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 1rem;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 2rem;
     position: absolute;
     left: 50%;
     bottom: 2rem;
@@ -132,14 +136,14 @@ export default {
     background-color: transparent;
     color: $white;
     cursor: pointer;
-    border: 1px solid rgba($white, 0.11);
+    border: 0.1rem solid rgba($white, 0.11);
     border-radius: 50%;
     width: 6rem;
     height: 6rem;
     --icon-fill-color: $white;
 
     &:hover {
-        border: 1px solid rgba($white, 0.8);
+        border: 0.1rem solid rgba($white, 0.8);
         --icon-fill-color: red;
 
         .button-arrow {
@@ -155,7 +159,7 @@ export default {
     transition: all .3s ease-in-out;
 
     &:hover {
-        border: 1px solid rgba($white, 0.11);
+        border: 0.1rem solid rgba($white, 0.11);
     }
 }
 
@@ -165,23 +169,12 @@ export default {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 .main {
     position: relative;
     background-image: url('../../assets/images/main-background.png');
+    background-size: cover;
     height: 124rem;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
 }
 
 .earth-image,
@@ -193,7 +186,7 @@ export default {
 .earth-image {
     z-index: $earth-z-index;
     right: 0;
-    top: -6.8rem
+    top: -6.8rem;
 }
 
 .coins-image {
@@ -202,20 +195,26 @@ export default {
     top: 17.7rem
 }
 
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding-top: 20.7rem;
+}
+
+.main-text-wrapper{
+    width: 100%;
+}
+
 .main-text {
     height: 23.4rem;
     width: 69.8rem;
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    position: absolute;
-    left: 16.5rem;
-    top: 20.7rem;
+    margin-bottom: 21.5rem;
 }
 
-.main-text__h1-wrapper {
-    width: 100%;
-}
 
 .main-text__p-wrapper {
     width: 56.7rem;
@@ -270,7 +269,7 @@ p {
 }
 
 .center-item {
-    backdrop-filter: blur(0px);
+    backdrop-filter: blur(0);
     position: absolute;
     bottom: 12.4rem;
 }
@@ -315,7 +314,7 @@ p {
     width: 100%;
     height: 100%;
     z-index: 999;
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(0.1rem);
 }
 
 .slider__buttons {

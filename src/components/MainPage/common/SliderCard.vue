@@ -41,7 +41,7 @@ export default {
     width: 100%;
     height: 100%;
     z-index: $blur-z-index;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(0.4rem);
 }
 
 .SlideCard {
@@ -60,7 +60,7 @@ export default {
     z-index: $swiper-z-index;
 
     &:global(.swiper-slide) {
-        transform: translateY(100px);
+        transform: translateY(10rem);
     }
 }
 
@@ -101,7 +101,7 @@ export default {
     align-items: center;
     background: $green;
     border-radius: 1.2rem;
-    box-shadow: 0px 8px 16px 0px rgba(75, 72, 241, 0.19);
+    box-shadow: 0 0.8rem 1.6rem 0 rgba(75, 72, 241, 0.19);
     @include text(button);
     margin: 3.2rem 3rem 0rem 3rem;
 }

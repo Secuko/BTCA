@@ -4,7 +4,7 @@
         font-family: Inter;
         font-size: 5.6rem;
         font-weight: 800;
-        line-height: 61px;
+        line-height: 6.1rem;
         text-align: left;
     }
 
@@ -12,7 +12,7 @@
         font-family: Inter;
         font-size: 4.8rem;
         font-weight: 800;
-        line-height: 52.37px;
+        line-height: 5.237rem;
         text-align: center;
     }
 
@@ -20,7 +20,7 @@
         font-family: Inter;
         font-size: 4.2rem;
         font-weight: 700;
-        line-height: 43px;
+        line-height: 4.3rem;
         text-align: left;
 
     }
@@ -29,81 +29,72 @@
         font-family: Inter;
         font-size: 3.2rem;
         font-weight: 700;
-        line-height: 40px;
+        line-height: 4rem;
         text-align: left;
     }
 
     @if $name ==caption {
-        font-family: Hauora;
         font-size: 1.8rem;
         font-weight: 800;
-        line-height: 24.59px;
+        line-height: 2.459rem;
         text-align: left;
     }
 
     @if $name ==p {
-        font-family: Hauora;
         font-size: 1.8rem;
         font-weight: 600;
-        line-height: 32px;
+        line-height: 3.2rem;
         text-align: left;
     }
 
     @if $name ==button {
-        font-family: Hauora;
         font-size: 1.6rem;
         font-weight: 700;
-        line-height: 21.86px;
+        line-height: 2.186rem;
         text-align: left;
 
     }
 
     @if $name ==body2 {
-        font-family: Hauora;
         font-size: 1.6rem;
         font-weight: 400;
-        line-height: 21.86px;
+        line-height: 2.186rem;
         text-align: left;
 
     }
 
     @if $name ==menu {
-        font-family: Hauora;
         font-size: 1.4rem;
         font-weight: 600;
-        line-height: 19.12px;
+        line-height: 1.912rem;
         text-align: left;
     }
 
     @if $name ==small {
-        font-family: Hauora;
         font-size: 1.4rem;
         font-weight: 600;
-        line-height: 19.12px;
+        line-height: 1.912rem;
         text-align: left;
     }
 
     @if $name ==footerLink {
-        font-family: Hauora;
         font-size: 1.4rem;
         font-weight: 400;
-        line-height: 15.76px;
+        line-height: 1.576rem;
         text-align: left;
     }
 
     @if $name ==copyrights {
-        font-family: Hauora;
         font-size: 1.2rem;
         font-weight: 400;
-        line-height: 20.47px;
+        line-height: 2.047rem;
         text-align: left;
     }
 
     @if $name ==footerText {
-        font-family: Hauora;
         font-size: 1.4rem;
         font-weight: 400;
-        line-height: 18.61px;
+        line-height: 1.861rem;
         text-align: left;
     }
 
@@ -111,17 +102,16 @@
         font-family: Golos;
         font-size: 18rem;
         font-weight: 700;
-        line-height: 196.38px;
+        line-height: 19.638rem;
         text-align: left;
         text-underline-position: from-font;
         text-decoration-skip-ink: none;
     }
 
     @if $name ==tips {
-        font-family: Hauora;
         font-size: 1.2rem;
         font-weight: 400;
-        line-height: 13.51px;
+        line-height: 1.351rem;
         text-align: left;
     }
 
