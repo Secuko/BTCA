@@ -1,5 +1,6 @@
 <script>
 import constants from '../constants/footer.json'
+import Icon from '../UI/Icon.vue';
 export default {
     computed: {
         constants() {
@@ -9,10 +10,8 @@ export default {
             return sprite;
         }
     },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
+    components: {
+        Icon
     }
 }
 
@@ -42,9 +41,8 @@ export default {
                             <div class="other-info__technologies">
                                 <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex"
                                     href="">
-                                    <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
-                                        <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>
-                                    </svg>
+                                    <Icon class="tech_icon" :iconHeight="`${item.height}`" :iconWidth="`${item.width}`"
+                                        :iconName="`${item.src}`" :spritePath="constants.SPRITE_PATH" :iconColor="`${item.color}`" />
                                 </a>
                             </div>
                             <div class="other-info__aside-text">
@@ -52,9 +50,8 @@ export default {
                             </div>
                             <div class="other-info__resourses-links">
                                 <a v-for="(item, socialIndex) in constants.SOCIAL_LINKS" :key="socialIndex" href="">
-                                    <svg class="icon" width="3.2rem" height="3.2rem">
-                                        <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`" />
-                                    </svg>
+                                    <Icon :iconHeight="'3.2rem'" :iconWidth="'3.2rem'" :iconName="`${item.src}`"
+                                        :spritePath="constants.SPRITE_PATH" />
                                 </a>
                             </div>
                         </div>
@@ -172,11 +169,6 @@ export default {
 .copyrights__text {
     @include text(copyrights);
     color: $grey
-}
-
-.social_icon {
-    width: 3.2rem;
-    height: 3.2rem;
 }
 
 a:hover {

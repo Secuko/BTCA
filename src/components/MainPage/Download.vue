@@ -1,23 +1,16 @@
 <script>
 import constants from '../constants/download.json'
-import Icon from './common/Icon.vue';
+import Icon from '../UI/Icon.vue';
 export default {
     computed: {
         constants() {
             return constants;
         }
     },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
-    },
     components: {
         Icon
     }
 }
-
-
 </script>
 
 
@@ -36,17 +29,15 @@ export default {
                     </div>
                     <div class="links">
                         <a v-for="(item, technologieIndex) in constants.TECHNOLOGIES" :key="technologieIndex" href="">
-                            <svg class="tech_icon" :width="`${item.width}`" :height="`${item.height}`">
-                                <use :href="`${getURL(constants.SPRITE_PATH)}#${item.src}`"></use>/>
-                            </svg>
+                            <Icon class="tech_icon" :iconHeight="`${item.height}`" :iconWidth="`${item.width}`"
+                                :iconName="`${item.src}`" :spritePath="constants.SPRITE_PATH"
+                                :iconColor="`${item.color}`" />
                         </a>
                     </div>
                     <button class="download-button">
-                        <!-- <svg class="apple-icon" width="1.6rem" height="2.0rem">
-                            <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_APPLE}`" />
-                        </svg> -->
                         <Icon :iconHeight="'2.0rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_APPLE"
-                            :spritePath="constants.SPRITE_PATH" />
+                            :spritePath="constants.SPRITE_PATH" :iconColor="constants.APPLE_ICON_COLOR" />
+
                         <span>{{ constants.BUTTON_TEXT }}</span>
                     </button>
                 </div>
@@ -112,12 +103,13 @@ export default {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    gap: 1.6rem;
     background: $blue26;
     color: $downloadButtonText;
-    gap: 1.6rem;
     @include text(button);
 
     &:hover {
+        transition: border 0.5s ease-in-out;
         border: 0.1rem solid $white;
         cursor: pointer;
     }

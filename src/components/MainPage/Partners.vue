@@ -1,15 +1,14 @@
 <script>
 import constants from '../constants/partners.json'
+import Icon from '../UI/Icon.vue';
 export default {
     computed: {
         constants() {
             return constants;
         },
     },
-    methods:{
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
+    components: {
+        Icon
     }
 
 }
@@ -38,9 +37,11 @@ export default {
                         </div>
                     </div>
                     <div class="rotate-icon-wrapper">
-                        <svg class="rotate-icon" width="3.7rem" height="3.7rem">
+                        <!-- <svg class="rotate-icon" width="3.7rem" height="3.7rem">
                             <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ROTATE}`"></use>
-                        </svg>
+                        </svg> -->
+                        <Icon :iconHeight="'3.7rem'" :iconWidth="'3.7rem'" :iconName="constants.ICON_ROTATE"
+                            :spritePath="constants.SPRITE_PATH" />
                     </div>
                 </div>
             </div>
@@ -89,7 +90,7 @@ export default {
     align-items: center;
 }
 
-.swap-field-right{
+.swap-field-right {
     display: flex;
     flex-direction: column;
 }
@@ -121,7 +122,6 @@ export default {
     -webkit-background-clip: text;
     left: -11.2rem;
     top: 9.6rem;
-
 }
 
 .text-block__h2 {

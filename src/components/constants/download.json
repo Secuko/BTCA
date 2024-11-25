@@ -3,31 +3,36 @@
     "SMALL_TEXT": "BTCA предоставляет вам инструменты и ресурсы, чтобы вы всегда могли контролировать свои средства.",
     "BUTTON_TEXT": "Скачать кошелек",
     "SPRITE_PATH": "../../assets/icons/sprite.svg",
-    "ICON_APPLE": "icon-apple-violet",
+    "ICON_APPLE": "icon-apple",
+    "APPLE_ICON_COLOR": "#8886FF",
     "TECHNOLOGIES": [
         {
             "src": "icon-android",
             "alt": "android",
             "width": "2.975rem",
-            "height": "3.4rem"
+            "height": "3.4rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-apple",
             "alt": "apple",
             "width": "2.56rem",
-            "height": "3.2rem"
+            "height": "3.2rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-linux",
             "alt": "linux",
             "width": "3.4rem",
-            "height": "3.4rem"
+            "height": "3.4rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-windows",
             "alt": "windows",
             "width": "3.4rem",
-            "height": "3.4rem"
+            "height": "3.4rem",
+            "color":"#636D85"
         }
     ]
 }

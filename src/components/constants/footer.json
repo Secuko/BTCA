@@ -91,25 +91,29 @@
             "src": "icon-android",
             "alt": "android",
             "width": "1.8rem",
-            "height": "2.1rem"
+            "height": "2.1rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-apple",
             "alt": "apple",
             "width": "1.6rem",
-            "height": "2.0rem"
+            "height": "2.0rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-linux",
             "alt": "linux",
             "width": "1.9rem",
-            "height": "2.0rem"
+            "height": "2.0rem",
+            "color":"#636D85"
         },
         {
             "src": "icon-windows",
             "alt": "windows",
             "width": "2.1rem",
-            "height": "2.1rem"
+            "height": "2.1rem",
+            "color":"#636D85"
         }
     ],
     "SOCIAL_LINKS": [

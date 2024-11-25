@@ -1,16 +1,16 @@
 <script>
 
 import constants from '../constants/header.json'
+import Icon from '../UI/Icon.vue';
+
 export default {
     computed: {
         constants() {
             return constants;
-        }
+        },
     },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
+    components:{
+        Icon
     }
 }
 
@@ -21,9 +21,11 @@ export default {
 <template>
     <header class="header">
         <div class="container">
-            <svg class="logo-icon" width="4.2rem" height="4.2rem">
+            <!-- <svg class="logo-icon" width="4.2rem" height="4.2rem">
                 <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_LOGO}`"></use>
-            </svg>
+            </svg> -->
+            <Icon :iconHeight="'4.2rem'" :iconWidth="'4.2rem'" :iconName="constants.ICON_LOGO"
+            :spritePath="constants.SPRITE_PATH" />
             <nav class="menu">
                 <div :class="['menu__element', { 'menu__element-bold': element.isBold }]"
                     v-for="(element, index) in constants.HEADER_MENU" :key="index">
@@ -32,17 +34,13 @@ export default {
             </nav>
             <div class="user-data">
                 <div class="user-data__language">
-                    <!-- <img src="../../assets/icons/header/language.svg" alt="language"> -->
-                    <!-- <use :href="`${getURL(constants.SPRITE_PATH)}#icon-android`"></use> -->
-                    <svg class="language-icon" width="1.5rem" height="1.6rem">
-                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_LANGUAGE}`"></use>
-                    </svg>
+                    <Icon :iconHeight="'1.5rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_LANGUAGE"
+                    :spritePath="constants.SPRITE_PATH" />
                     <span>{{ constants.LANGUAGE }}</span>
                 </div>
                 <div class="user-data__score">
-                    <svg class="coin-icon" width="2.0rem" height="2.0rem">
-                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_COIN}`"></use>
-                    </svg>
+                    <Icon :iconHeight="'2.0rem'" :iconWidth="'2.0rem'" :iconName="constants.ICON_COIN"
+                    :spritePath="constants.SPRITE_PATH" />
                     <span>{{ constants.NUMBER }}</span>
                 </div>
             </div>

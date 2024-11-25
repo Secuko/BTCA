@@ -1,5 +1,6 @@
 <script>
 import constants from '../constants/instructions.json'
+
 export default {
     computed: {
         constants() {
