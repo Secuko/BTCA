@@ -1,55 +1,44 @@
-<script>
-export default {
-    props: {
-        spritePath: {
-            type: String,
-            required: true,
-        },
-        iconName: {
-            type: String,
-            required: true,
-        },
-        iconWidth: {
-            type: String,
-            required: true,
-        },
-        iconHeight: {
-            type: String,
-            required: true,
-        },
-        iconColor: {
-            type: String,
-            required: false,
-        },
-        hoverEffect: {
-            type: Boolean,
-            required: false,
-            default: true
-        }
-    },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        },
-    },
-    computed: {
-        dynamicStyles() {
-            return {
-                '--icon-color': this.iconColor,
-            };
-        }
-    },
+<script setup>
+// export default {
+//     computed: {
+//         dynamicStyles() {
+//             return {
+//                 '--icon-color': this.iconColor,
+//             };
+//         }
+//     },
+// }
+
+function getURL(src) {
+    return new URL(src, import.meta.url).href
 }
+
+const props = defineProps({
+    spritePath: String,
+    iconName: String,
+    iconWidth: String,
+    iconHeight: String,
+    iconColor: {
+        type: String,
+        required: false
+    },
+    hoverEffect: {
+        type: Boolean,
+        required: false,
+        default: true
+    }
+})
+
 </script>
 
 <template>
     <svg class="svg"
-        :style="{ width: iconWidth, height: iconHeight, '--icon-color': iconColor, '--hover-effect': hoverEffect }">
-        <use :href="`${getURL(spritePath)}#${iconName}`" />
+        :style="{ width: props.iconWidth, height: props.iconHeight, '--icon-color': props.iconColor, '--hover-effect': props.hoverEffect }">
+        <use :href="`${getURL(props.spritePath)}#${props.iconName}`" />
     </svg>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .svg {
     color: var(--icon-color, $white);
     cursor: pointer;

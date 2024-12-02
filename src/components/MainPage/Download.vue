@@ -1,16 +1,7 @@
-<script>
+<script setup>
 import constants from '../constants/download.json'
 import Icon from '../UI/Icon.vue';
-export default {
-    computed: {
-        constants() {
-            return constants;
-        }
-    },
-    components: {
-        Icon
-    }
-}
+
 </script>
 
 

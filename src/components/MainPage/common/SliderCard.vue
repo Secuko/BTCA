@@ -1,38 +1,33 @@
-<script>
-export default {
-    name: 'SliderCard',
-    props: {
-        card: {
-            type: Object,
-            required: true,
-        },
-        active: {
-            type: Boolean,
-            default: false,
-            required: false
-        }
+<script setup>
+
+const props = defineProps({
+    card: {
+        type: Object,
+        required: true,
     },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
+    active: {
+        type: Boolean,
+        default: false,
+        required: false
     }
+})
+
+function getURL(src) {
+    return new URL(src, import.meta.url).href
 }
 
 </script>
 
 
 <template>
-
-    <div :class="['SlideCard', $style.SlideCard, { [$style['_active']]: active }]"
-        :style="{ backgroundImage: `url(${getURL(card.img)})` }">
-        <span :class="$style.subtitle">{{ card.header_text }}</span>
-        <span :class="$style.title">{{ card.h3_text }}</span>
-        <span :class="$style.text">{{ card.small_text }}</span>
-        <button :class="$style.btn">{{ card.button_text }}</button>
-        <div :class="{ [$style['blur']]: !active }" />
+    <div :class="['SlideCard', $style.SlideCard, { [$style['_active']]: props.active }]"
+        :style="{ backgroundImage: `url(${getURL(props.card.img)})` }">
+        <span :class="$style.subtitle">{{ props.card.header_text }}</span>
+        <span :class="$style.title">{{ props.card.h3_text }}</span>
+        <span :class="$style.text">{{ props.card.small_text }}</span>
+        <button :class="$style.btn">{{ props.card.button_text }}</button>
+        <div :class="{ [$style['blur']]: !props.active }" />
     </div>
-
 </template>
 
 <style lang="scss" module>
@@ -52,7 +47,7 @@ export default {
     height: 46rem;
     background-color: $sliderBlack;
     opacity: 0.5;
-    transition: all .3s ease-in-out;
+    transition: transform 0.6s ease-in-out;
     cursor: pointer;
     border-radius: 0.8rem;
     background-repeat: no-repeat;

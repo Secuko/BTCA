@@ -1,20 +1,6 @@
-<script>
-
+<script setup>
 import constants from '../constants/header.json'
 import Icon from '../UI/Icon.vue';
-
-export default {
-    computed: {
-        constants() {
-            return constants;
-        },
-    },
-    components:{
-        Icon
-    }
-}
-
-
 </script>
 
 
@@ -25,7 +11,7 @@ export default {
                 <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_LOGO}`"></use>
             </svg> -->
             <Icon :iconHeight="'4.2rem'" :iconWidth="'4.2rem'" :iconName="constants.ICON_LOGO"
-            :spritePath="constants.SPRITE_PATH" />
+                :spritePath="constants.SPRITE_PATH" />
             <nav class="menu">
                 <div :class="['menu__element', { 'menu__element-bold': element.isBold }]"
                     v-for="(element, index) in constants.HEADER_MENU" :key="index">
@@ -35,12 +21,12 @@ export default {
             <div class="user-data">
                 <div class="user-data__language">
                     <Icon :iconHeight="'1.5rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_LANGUAGE"
-                    :spritePath="constants.SPRITE_PATH" />
+                        :spritePath="constants.SPRITE_PATH" />
                     <span>{{ constants.LANGUAGE }}</span>
                 </div>
                 <div class="user-data__score">
                     <Icon :iconHeight="'2.0rem'" :iconWidth="'2.0rem'" :iconName="constants.ICON_COIN"
-                    :spritePath="constants.SPRITE_PATH" />
+                        :spritePath="constants.SPRITE_PATH" />
                     <span>{{ constants.NUMBER }}</span>
                 </div>
             </div>
@@ -56,7 +42,7 @@ export default {
     box-shadow: 0rem 0.4rem 4rem 0rem #0000000D;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: row;
     height: 6.8rem;

@@ -1,19 +1,6 @@
-<script>
+<script setup>
 import constants from '../constants/footer.json'
 import Icon from '../UI/Icon.vue';
-export default {
-    computed: {
-        constants() {
-            return constants;
-        },
-        sprite() {
-            return sprite;
-        }
-    },
-    components: {
-        Icon
-    }
-}
 
 </script>
 

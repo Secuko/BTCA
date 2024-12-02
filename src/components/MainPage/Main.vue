@@ -1,59 +1,108 @@
-<script>
+<script setup>
 import Swiper from 'swiper';
 import constants from '../constants/main.json';
 import SliderCard from './common/SliderCard.vue';
-export default {
-    components: { SliderCard },
-    data() {
-        return {
-            activeIndex: 1,
-            slider: null,
-        };
-    },
-    mounted() {
-        this.initSwiper();
-    },
-    computed: {
-        constants() {
-            return constants;
-        },
-        isEnd() {
-            return this.activeIndex === constants.SLIDER_DATA.length - 1;
-        },
-        isStart() {
-            return this.activeIndex === 0;
-        }
-    },
-    methods: {
-        initSwiper() {
-            this.slider = new Swiper(this.$refs.swiperEl, {
-                slidesPerView: 3,
-                spaceBetween: 25,
-                centeredSlides: true,
-                initialSlide: 1,
-            });
-            this.slider?.on('slideChange', swiper => {
-                this.activeIndex = swiper.activeIndex;
-            });
-        },
-        clickNextSlide() {
-            this.slider.slideNext();
-        },
-        clickPrevSlide() {
-            this.slider.slidePrev();
-        },
-        clickCard(index) {
-            if (this.activeIndex < index) {
-                this.slider.slideNext();
-            } else {
-                this.slider.slidePrev();
-            }
-        },
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
+import Icon from '../UI/Icon.vue';
+import { computed, onMounted, ref } from 'vue';
+
+
+// export default {
+//     components: { SliderCard, Icon },
+//     data() {
+//         return {
+//             activeIndex: 1,
+//             slider: null,
+//         };
+//     },
+//     mounted() {
+//         this.initSwiper();
+//     },
+//     computed: {
+//         constants() {
+//             return constants;
+//         },
+//         isEnd() {
+//             return this.activeIndex === constants.SLIDER_DATA.length - 1;
+//         },
+//         isStart() {
+//             return this.activeIndex === 0;
+//         }
+//     },
+//     methods: {
+//         initSwiper() {
+//             this.slider = new Swiper(this.$refs.swiperEl, {
+//                 slidesPerView: 3,
+//                 spaceBetween: 25,
+//                 centeredSlides: true,
+//                 initialSlide: 1,
+//             });
+//             this.slider?.on('slideChange', swiper => {
+//                 this.activeIndex = swiper.activeIndex;
+//             });
+//         },
+//         clickNextSlide() {
+//             this.slider.slideNext();
+//         },
+//         clickPrevSlide() {
+//             this.slider.slidePrev();
+//         },
+//         clickCard(index) {
+//             if (this.activeIndex < index) {
+//                 this.slider.slideNext();
+//             } else {
+//                 this.slider.slidePrev();
+//             }
+//         },
+//     }
+// }
+
+//variables
+const activeIndex = ref(1)
+const slider = ref(null)
+
+//hooks
+onMounted(() => {
+    initSwiper()
+})
+
+//methods
+function initSwiper() {
+    const slider = new Swiper(Swiper.swiperEl, {
+        slidesPerView: 3,
+        spaceBetween: 25,
+        centeredSlides: true,
+        initialSlide: 1,
+    });
+    console.log(slider)
+    slider?.on('slideChange', swiper => {
+        activeIndex = swiper.activeIndex;
+    });
+}
+
+function clickNextSlide() {
+    slider.slideNext();
+}
+
+function clickPrevSlide() {
+    slider.slidePrev();
+}
+
+function clickCard(index) {
+    if (activeIndex < index) {
+        slider.slideNext();
+    } else {
+        slider.slidePrev();
     }
 }
+
+//computed
+const isEnd = computed(() => {
+    return activeIndex === constants.SLIDER_DATA.length - 1;
+})
+
+const isStart = computed(() => {
+    return activeIndex === 0;
+})
 </script>
 
 
@@ -75,21 +124,18 @@ export default {
             <div ref="swiperEl" class="swiper">
                 <div class="swiper-wrapper">
                     <SliderCard :key="index" v-for="(card, index) in constants.SLIDER_DATA" :card="card"
-                        class="swiper-slide" :active="this.activeIndex === index" @click="clickCard(index)" />
+                        class="swiper-slide" :active="activeIndex === index" @click="clickCard(index)" />
                 </div>
             </div>
             <div class="navigation">
                 <button class="navigation__btn" :class="{ 'disabled': isStart }" @click="clickPrevSlide">
                     <!-- <img src="../../assets/icons/common/left_arrow.svg" /> -->
-                    <svg class="button-arrow left-arrow" width="2.4rem" height="2.4rem">
-                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
-                    </svg>
+                    <Icon class="button-arrow left-arrow" :iconHeight="'2.4rem'" :iconWidth="'2.4rem'"
+                        :iconName="constants.ICON_ARROW" :spritePath="constants.SPRITE_PATH" />
                 </button>
                 <button class="navigation__btn" :class="{ 'disabled': isEnd }" @click="clickNextSlide">
-                    <!-- <img src="../../assets/icons/common/right_arrow.svg" /> -->
-                    <svg class="button-arrow" width="2.4rem" height="2.4rem">
-                        <use :href="`${getURL(constants.SPRITE_PATH)}#${constants.ICON_ARROW}`"></use>
-                    </svg>
+                    <Icon class="button-arrow" :iconHeight="'2.4rem'" :iconWidth="'2.4rem'"
+                        :iconName="constants.ICON_ARROW" :spritePath="constants.SPRITE_PATH" />
                 </button>
             </div>
         </div>
@@ -97,7 +143,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-
 .swiper {
     width: 100%;
     height: 60rem;
@@ -195,14 +240,14 @@ export default {
     top: 17.7rem
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: start;
     padding-top: 20.7rem;
 }
 
-.main-text-wrapper{
+.main-text-wrapper {
     width: 100%;
 }
 

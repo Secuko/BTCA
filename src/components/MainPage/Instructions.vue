@@ -1,20 +1,22 @@
-<script>
+<script setup>
 import constants from '../constants/instructions.json'
+// export default {
+//     computed: {
+//         constants() {
+//             return constants;
+//         }
+//     },
+//     methods: {
+//         getURL(src) {
+//             return new URL(src, import.meta.url).href
+//         }
+//     }
 
-export default {
-    computed: {
-        constants() {
-            return constants;
-        }
-    },
-    methods: {
-        getURL(src) {
-            return new URL(src, import.meta.url).href
-        }
-    }
+// }
 
+function getURL(src) {
+    return new URL(src, import.meta.url).href
 }
-
 
 </script>
 
@@ -183,7 +185,7 @@ export default {
     height: 4.9rem;
     width: 16.8rem;
 
-    &:hover{
+    &:hover {
         border: 0.1rem solid $white;
     }
 }
@@ -209,7 +211,7 @@ export default {
     border-image-source: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-input{
+input {
     @include text(body2);
     color: $white;
     width: 40.0rem;
