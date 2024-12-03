@@ -5,61 +5,11 @@ import SliderCard from './common/SliderCard.vue';
 import Icon from '../UI/Icon.vue';
 import { computed, onMounted, ref } from 'vue';
 
-
-// export default {
-//     components: { SliderCard, Icon },
-//     data() {
-//         return {
-//             activeIndex: 1,
-//             slider: null,
-//         };
-//     },
-//     mounted() {
-//         this.initSwiper();
-//     },
-//     computed: {
-//         constants() {
-//             return constants;
-//         },
-//         isEnd() {
-//             return this.activeIndex === constants.SLIDER_DATA.length - 1;
-//         },
-//         isStart() {
-//             return this.activeIndex === 0;
-//         }
-//     },
-//     methods: {
-//         initSwiper() {
-//             this.slider = new Swiper(this.$refs.swiperEl, {
-//                 slidesPerView: 3,
-//                 spaceBetween: 25,
-//                 centeredSlides: true,
-//                 initialSlide: 1,
-//             });
-//             this.slider?.on('slideChange', swiper => {
-//                 this.activeIndex = swiper.activeIndex;
-//             });
-//         },
-//         clickNextSlide() {
-//             this.slider.slideNext();
-//         },
-//         clickPrevSlide() {
-//             this.slider.slidePrev();
-//         },
-//         clickCard(index) {
-//             if (this.activeIndex < index) {
-//                 this.slider.slideNext();
-//             } else {
-//                 this.slider.slidePrev();
-//             }
-//         },
-//     }
-// }
-
 //variables
 const activeIndex = ref(1)
-const slider = ref(null)
-
+let slider = ref(null)
+const swiperEl = ref(null)
+const swiperSpeedMs = 700
 //hooks
 onMounted(() => {
     initSwiper()
@@ -67,7 +17,7 @@ onMounted(() => {
 
 //methods
 function initSwiper() {
-    const slider = new Swiper(Swiper.swiperEl, {
+     slider = new Swiper(swiperEl.value, {
         slidesPerView: 3,
         spaceBetween: 25,
         centeredSlides: true,
@@ -80,18 +30,18 @@ function initSwiper() {
 }
 
 function clickNextSlide() {
-    slider.slideNext();
+    slider.slideNext(swiperSpeedMs);
 }
 
 function clickPrevSlide() {
-    slider.slidePrev();
+    slider.slidePrev(swiperSpeedMs);
 }
 
 function clickCard(index) {
     if (activeIndex < index) {
-        slider.slideNext();
+        slider.slideNext(swiperSpeedMs);
     } else {
-        slider.slidePrev();
+        slider.slidePrev(swiperSpeedMs);
     }
 }
 
