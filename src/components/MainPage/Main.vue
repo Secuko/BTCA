@@ -3,17 +3,21 @@ import Swiper from 'swiper';
 import constants from '../constants/main.json';
 import SliderCard from './common/SliderCard.vue';
 import Icon from '../UI/Icon.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeMount, onMounted, ref } from 'vue';
 
 //variables
 let activeIndex = ref(0)
 let slider = ref(null)
-const swiperEl = ref(null)
+const swiperEl = ref()
 const swiperSpeedMs = 700
+
+onBeforeMount(()=>{
+    activeIndex.value = centralIndex.value
+})
+
 //hooks
 onMounted(() => {
     initSwiper()
-    activeIndex.value = Math.round(constants.SLIDER_DATA.length/2) - 1
 })
 
 //methods
@@ -22,7 +26,7 @@ function initSwiper() {
         slidesPerView: 3,
         spaceBetween: 25,
         centeredSlides: true,
-        initialSlide: 1,
+        initialSlide: centralIndex.value,
     });
     slider?.on('slideChange', swiper => {
         activeIndex.value = slider.activeIndex;
@@ -50,6 +54,10 @@ const isEnd = computed(() => {
     return activeIndex.value === constants.SLIDER_DATA.length - 1;
 })
 
+const centralIndex = computed(()=>{
+    return Math.round(constants.SLIDER_DATA.length/2) - 1;
+})
+
 const isStart = computed(() => {
     return activeIndex.value === 0;
 })
@@ -58,7 +66,7 @@ const isStart = computed(() => {
 
 <template>
     <main class="main">
-        <div class="container">
+        <section class="container">
             <img src="../../assets/images/earth.png" alt="earth" class="earth-image">
             <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
             <div class="main-text-wrapper">
@@ -88,7 +96,7 @@ const isStart = computed(() => {
                         :iconName="constants.ICON_ARROW" :spritePath="constants.SPRITE_PATH" />
                 </button>
             </div>
-        </div>
+        </section>
     </main>
 </template>
 
