@@ -6,26 +6,26 @@ import Icon from '../UI/Icon.vue';
 import { computed, onMounted, ref } from 'vue';
 
 //variables
-const activeIndex = ref(1)
+let activeIndex = ref(0)
 let slider = ref(null)
 const swiperEl = ref(null)
 const swiperSpeedMs = 700
 //hooks
 onMounted(() => {
     initSwiper()
+    activeIndex.value = Math.round(constants.SLIDER_DATA.length/2) - 1
 })
 
 //methods
 function initSwiper() {
-     slider = new Swiper(swiperEl.value, {
+    slider = new Swiper(swiperEl.value, {
         slidesPerView: 3,
         spaceBetween: 25,
         centeredSlides: true,
         initialSlide: 1,
     });
-    console.log(slider)
     slider?.on('slideChange', swiper => {
-        activeIndex = swiper.activeIndex;
+        activeIndex.value = slider.activeIndex;
     });
 }
 
@@ -38,20 +38,20 @@ function clickPrevSlide() {
 }
 
 function clickCard(index) {
-    if (activeIndex < index) {
+    if (activeIndex.value < index) {
         slider.slideNext(swiperSpeedMs);
-    } else {
+    } else if(activeIndex.value > index) {
         slider.slidePrev(swiperSpeedMs);
     }
 }
 
 //computed
 const isEnd = computed(() => {
-    return activeIndex === constants.SLIDER_DATA.length - 1;
+    return activeIndex.value === constants.SLIDER_DATA.length - 1;
 })
 
 const isStart = computed(() => {
-    return activeIndex === 0;
+    return activeIndex.value === 0;
 })
 </script>
 
@@ -74,7 +74,7 @@ const isStart = computed(() => {
             <div ref="swiperEl" class="swiper">
                 <div class="swiper-wrapper">
                     <SliderCard :key="index" v-for="(card, index) in constants.SLIDER_DATA" :card="card"
-                        class="swiper-slide" :active="activeIndex === index" @click="clickCard(index)" />
+                        class="swiper-slide" :active="activeIndex=== index" @click="clickCard(index)" />
                 </div>
             </div>
             <div class="navigation">
@@ -158,10 +158,6 @@ const isStart = computed(() => {
     }
 }
 
-.img {
-    width: 2.4rem;
-    height: 2.4rem;
-}
 
 
 .main {
@@ -335,36 +331,3 @@ p {
     }
 }
 </style>
-
-
-<!-- <div class="slider">
-    <div class="slider__items">
-        <div class="slider-item " v-for="(item, index) in constants.SLIDER_DATA" :key="index">
-            <div class="blur-layer"></div>
-            <div class="item-body">
-                <p class="item-body__header-text">
-                    {{ item.header_text }}
-                </p>
-                <h3 class="item-body__h3-text">
-                    {{ item.h3_text }}
-                </h3>
-                <p class="item-body__small-text">
-                    {{ item.small_text }}
-                </p>
-                <button class="item-button">
-                    <span class="item-button_text">
-                        {{ item.button_text }}
-                    </span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="slider__buttons">
-        <button class="slider-button">
-            <img class="slider-button__icon" src="../../assets/icons/common/left_arrow.svg" alt="left">
-        </button>
-        <button class="slider-button">
-            <img class="slider-button__icon" src="../../assets/icons/common/right_arrow.svg" alt="right">
-        </button>
-    </div>
-</div> -->

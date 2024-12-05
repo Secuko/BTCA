@@ -1,4 +1,5 @@
 <script setup>
+import {onMounted} from 'vue';
 
 const props = defineProps({
     card: {
@@ -11,6 +12,7 @@ const props = defineProps({
         required: false
     }
 })
+
 
 function getURL(src) {
     return new URL(src, import.meta.url).href
