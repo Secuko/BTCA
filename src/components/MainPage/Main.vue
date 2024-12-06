@@ -12,12 +12,12 @@ const swiperEl = ref()
 const swiperSpeedMs = 700
 
 onBeforeMount(()=>{
-    activeIndex.value = centralIndex.value
+    activeIndex.value = centralIndex.value;
 })
 
 //hooks
 onMounted(() => {
-    initSwiper()
+    initSwiper();
 })
 
 //methods

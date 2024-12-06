@@ -1,6 +1,37 @@
 <script setup>
 import constants from '../constants/header.json'
 import Icon from '../UI/Icon.vue';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { getBTCValue } from '../../api/main';
+
+let BTCValue = ref(0)
+let intervalId = null
+
+
+//hooks
+onMounted(() => {
+    getData()
+
+    intervalId = setInterval(() => {
+        getData();
+    }, 6000);
+})
+
+onUnmounted(() => {
+    clearInterval(intervalId);
+});
+
+async function getData() {
+    let str = String(await getBTCValue());
+    if (str.indexOf('.') !== -1) {
+        str = str.substring(0, str.indexOf('.')) + '$';
+    }
+    BTCValue.value = str
+    let date = new Date()
+    console.log(`${BTCValue.value} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`)
+}
+
+
 </script>
 
 
@@ -27,7 +58,7 @@ import Icon from '../UI/Icon.vue';
                 <div class="user-data__score">
                     <Icon :iconHeight="'2.0rem'" :iconWidth="'2.0rem'" :iconName="constants.ICON_COIN"
                         :spritePath="constants.SPRITE_PATH" />
-                    <span>{{ constants.NUMBER }}</span>
+                    <span>{{ BTCValue }}</span>
                 </div>
             </div>
         </div>
@@ -94,6 +125,11 @@ import Icon from '../UI/Icon.vue';
     justify-content: center;
 }
 
+.user-data__score {
+    padding: 0 0.8rem;
+    gap: 0.6rem;
+}
+
 .user-data__language {
     width: 7.6rem;
 
@@ -101,11 +137,6 @@ import Icon from '../UI/Icon.vue';
         cursor: pointer;
         background: #000;
     }
-}
-
-//нужно убрать по идее
-.user-data__score {
-    width: 10.6rem;
 }
 
 .user-data__language img,
@@ -130,15 +161,10 @@ span {
     display: inline-block;
 }
 
-.user-data__score img {
-    margin-left: 0.9rem;
-}
 
 .user-data__score span {
-    @include text(caption);
+    @include text(captionHeader);
     color: $white;
-    margin-left: 0.9rem;
-    margin-right: 1rem;
 }
 
 a {
