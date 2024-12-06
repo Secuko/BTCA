@@ -12,11 +12,10 @@ export const getBTCValue = async () => {
         const { data } = response.data
         if (response.status == 200){
             return response.data.price_24h
-        } else {
-            return "Ошибка"
         }
     } catch (error) {
-        console.error('Error registering user:', error.response?.data || error.message);
-        throw error;
+        console.error('Error getting data:', error.response?.data || error.message);
+        // throw error;
+        return "Ошибка получения";
     }
 };

@@ -23,6 +23,7 @@ onUnmounted(() => {
 
 async function getData() {
     let str = String(await getBTCValue());
+    console.log(str)
     if (str.indexOf('.') !== -1) {
         str = str.substring(0, str.indexOf('.')) + '$';
     }
@@ -123,6 +124,7 @@ async function getData() {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    white-space: nowrap
 }
 
 .user-data__score {
