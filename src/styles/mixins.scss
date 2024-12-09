@@ -33,6 +33,14 @@
         text-align: left;
     }
 
+    @if $name ==h3CardForm {
+        font-family: Inter;
+        font-size: 2.4rem;
+        font-weight: 700;
+        line-height: 4rem;
+        text-align: left;
+    }
+
     @if $name ==caption {
         font-size: 1.8rem;
         font-weight: 800;

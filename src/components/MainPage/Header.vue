@@ -7,14 +7,12 @@ import { getBTCValue } from '../../api/main';
 let BTCValue = ref(0)
 let intervalId = null
 
-
-//hooks
 onMounted(() => {
     getData()
 
     intervalId = setInterval(() => {
         getData();
-    }, 6000);
+    }, 60000);
 })
 
 onUnmounted(() => {
