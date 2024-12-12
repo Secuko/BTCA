@@ -6,13 +6,14 @@ import { getBTCValue } from '../../api/main';
 
 let BTCValue = ref(0)
 let intervalId = null
+const INTERVAL_MS = 60000
 
 onMounted(() => {
     getData()
 
     intervalId = setInterval(() => {
         getData();
-    }, 60000);
+    }, INTERVAL_MS);
 })
 
 onUnmounted(() => {

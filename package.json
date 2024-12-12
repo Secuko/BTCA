@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vee-validate/zod": "^4.14.7",
     "axios": "^1.7.9",
     "swiper": "^11.1.14",
     "vee-validate": "^4.14.7",
