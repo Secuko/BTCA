@@ -3,6 +3,9 @@
     "SPRITE_PATH": "../../assets/icons/sprite.svg",
     "SMALL_TEXT_1": "Гражданство РФ?",
     "CONTRACT_LINK": "Заполняя форму, я принимаю условия передачи информации и использования карты до встречи и даю согласие на получение информации о продуктах и услугах Банка и партнеров",
+    "EMAIL_TEXT": "Электронная почта",
+    "EMAIL_PLACEHOLDER": "ivan@domain.ru",
+    "ICON_CHECKED": "icon-checked",
     "CARDS": [
         {
             "src": "/card1.png",

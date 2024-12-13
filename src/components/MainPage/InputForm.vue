@@ -11,6 +11,7 @@ let information = ref(null)
 let currentInfoIndex = ref(null)
 const INTERVAL_MS = 5000
 let intervalId = null
+let loaderValue = ref(null)
 
 onBeforeMount(() => {
     if (constants.INFO_FIELD.length !== 0) {

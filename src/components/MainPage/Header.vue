@@ -162,7 +162,6 @@ span {
     display: inline-block;
 }
 
-
 .user-data__score span {
     @include text(captionHeader);
     color: $white;
