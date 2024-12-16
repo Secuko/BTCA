@@ -1,5 +1,6 @@
 <script setup>
 import EmailField from '../Inputs/emailField.vue';
+import NameField from '../Inputs/nameField.vue';
 import Select from '../Inputs/select.vue';
 import Icon from '../UI/Icon.vue';
 import constants from '../constants/inputForm.json'
@@ -84,6 +85,7 @@ const changeCurrentInfoIndex = (data) => {
                     <div class="inside">
                         <div class="form">
                             <Select @changeCard="changeCurrentInfoIndex" />
+                            <NameField/>
                             <EmailField />
                             <div class="h3-wrapper">
                                 <h3>

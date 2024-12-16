@@ -2,32 +2,32 @@
 import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../UI/Icon.vue';
 
 const emailError = "Проверьте адрес электронной почты"
-const inputIsActive = ref(false)
 let isInputVisible = ref(false)
 const inputForm = ref(null)
 const inputField = ref(null)
-const isFocused = ref(null)
+const inputIsNotFocused = ref(null)
 const isError = ref(null)
 
 const { values, errors, defineField } = useForm({
   validationSchema: toTypedSchema(
     z.object({
-      email: z.string().email(emailError),
+      email: z.string({ required_error: '' }).email(emailError),
     }),
   ),
 });
 
-const changeInputState = (value) => {
+const changeInputVisibility = (value) => {
   isInputVisible.value = value
 }
 
 onMounted(() => {
   addClickListener()
+  // console.log(email.value)
 })
 
 const [email, emailAttrs] = defineField('email');
@@ -49,9 +49,10 @@ const handleClickOutside = (event) => {
   const input = inputForm.value;
   if (input && !input.contains(event.target)) {
     if (!email.value && email != "") {
-      changeInputState(false)
+      changeInputVisibility(false)
     }
-    console.log(errors.value.email)
+    inputIsNotFocused.value = true;
+    // console.log(errors.value.email)
     if (errors.value.email != null) {
       isError.value = true
     }
@@ -60,14 +61,19 @@ const handleClickOutside = (event) => {
 
 const focusInput = () => {
   if (inputField.value) {
-    console.log(inputField)
+    // console.log(inputField)
     //не понимаю как фокусировать поле
     inputField.value.focus();
   }
 };
 
+const isIconHidden = computed(() => {
+  return (isError.value || (errors.value.email !== undefined) || (email.value === undefined))
+})
+
 const changeBackligth = () => {
   isError.value = false;
+  inputIsNotFocused.value = false;
 }
 
 onUnmounted(() => {
@@ -77,27 +83,33 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div :class="['input-field', { 'errorBackligth': isError }]" ref="inputForm"
-    @click="changeInputState(true), focusInput()">
-    <div class="input-wrapper">
-      <div :class="['placeholder', { 'fullView': isInputVisible }]">
-        <span :class="['placeholder__text', { 'smallText': isInputVisible, 'bigText': !isInputVisible }]">
-          {{ constants.EMAIL_TEXT }}
-        </span>
+  <form action="" class="input-form">
+    <div :class="['input-field', { 'errorBackligth': isError }]" ref="inputForm"
+      @click="changeInputVisibility(true), focusInput()">
+      <div class="input-wrapper">
+        <div :class="['placeholder', { 'fullView': isInputVisible }]">
+          <span :class="['placeholder__text', { 'smallText': isInputVisible, 'bigText': !isInputVisible }]">
+            {{ constants.EMAIL_TEXT }}
+          </span>
+        </div>
+        <input ref="inputField" v-model="email" v-bind="emailAttrs" :placeholder="constants.EMAIL_PLACEHOLDER"
+          @input="checkErrows" @focus="changeBackligth" :class="['input', { 'isHidden': !isInputVisible }]" />
       </div>
-      <input ref="inputField" v-model="email" v-bind="emailAttrs" :placeholder="constants.EMAIL_PLACEHOLDER"
-        @input="checkErrows" @focus="changeBackligth" :class="['input', { 'isHidden': !isInputVisible }]" />
+      <div :class="['mark', { 'hidden': isIconHidden }]">
+        <Icon :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_CHECKED"
+          :spritePath="constants.SPRITE_PATH" :iconColor="'#00aa00'" :hoverEffect="false" />
+      </div>
     </div>
-    <div :class="['mark',{'hidden':(isError || errors.email !== null)}]">
-      <Icon :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_CHECKED"
-        :spritePath="constants.SPRITE_PATH" :iconColor="'#00aa00'" :hoverEffect="false" />
-    </div>
-  </div>
-  <div class="error-text">{{ errors.email }}</div>
+    <div class="error-text" v-if="inputIsNotFocused">{{ errors.email }}</div>
+  </form>
 </template>
 
 
 <style lang="scss" scoped>
+.input-form {
+  height: 10rem;
+}
+
 .input-field {
   height: 5.6rem;
   width: 25.8rem;
@@ -123,7 +135,7 @@ onUnmounted(() => {
   align-items: center;
 }
 
-.mark.hidden{
+.mark.hidden {
   visibility: hidden
 }
 
