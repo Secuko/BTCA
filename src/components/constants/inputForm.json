@@ -8,6 +8,7 @@
     "NAME_TEXT": "Фамилия, имя и отчество*",
     "NAME_PLACEHOLDER": "Иванов Алексей Петрович",
     "NAME_REQUIRED_ERROR": "Укажите фамилию, имя и отчество через пробел",
+    "EMAIL_REQUIRED_ERROR": "Проверьте адрес электронной почты",
     "ICON_CHECKED": "icon-checked",
     "CARDS": [
         {

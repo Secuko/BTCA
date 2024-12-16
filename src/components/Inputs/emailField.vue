@@ -6,7 +6,6 @@ import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../UI/Icon.vue';
 
-const emailError = "Проверьте адрес электронной почты"
 let isInputVisible = ref(false)
 const inputForm = ref(null)
 const inputField = ref(null)
@@ -16,7 +15,7 @@ const isError = ref(null)
 const { values, errors, defineField } = useForm({
   validationSchema: toTypedSchema(
     z.object({
-      email: z.string({ required_error: '' }).email(emailError),
+      email: z.string({ required_error: '' }).email(constants.EMAIL_REQUIRED_ERROR),
     }),
   ),
 });
@@ -83,7 +82,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <form action="" class="input-form">
+  <div class="input-form">
     <div :class="['input-field', { 'errorBackligth': isError }]" ref="inputForm"
       @click="changeInputVisibility(true), focusInput()">
       <div class="input-wrapper">
@@ -101,7 +100,7 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="error-text" v-if="inputIsNotFocused">{{ errors.email }}</div>
-  </form>
+  </div>
 </template>
 
 

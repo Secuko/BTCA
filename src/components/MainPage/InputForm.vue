@@ -83,7 +83,7 @@ const changeCurrentInfoIndex = (data) => {
                 </div>
                 <form class="cardForm">
                     <div class="inside">
-                        <div class="form">
+                        <form action="" class="form">
                             <Select @changeCard="changeCurrentInfoIndex" />
                             <NameField/>
                             <EmailField />
@@ -92,7 +92,7 @@ const changeCurrentInfoIndex = (data) => {
                                     Выберите дизайн карты
                                 </h3>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </form>
             </div>

@@ -88,7 +88,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <form action="" class="input-form">
+    <div class="input-form">
         <div :class="['input-field', { 'errorBackligth': isError }]" ref="inputForm"
             @click="changeInputState(true), focusInput()">
             <div class="input-wrapper">
@@ -107,7 +107,7 @@ onUnmounted(() => {
             </div>
         </div>
         <div class="error-text" v-if="inputIsNotFocused">{{ errors.name }}</div>
-    </form>
+    </div>
 </template>
 
 
