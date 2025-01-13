@@ -11,14 +11,14 @@ const inputForm = ref(null)
 const inputField = ref(null)
 const inputIsNotFocused = ref(null)
 const isError = ref(false)
-const nameRegex = /^[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?(?:\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)?$/;
+const NAME_REGEX = /^[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?(?:\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)?$/;
 
 
 
 const { values, errors, defineField } = useForm({
     validationSchema: toTypedSchema(
         z.object({
-            name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(nameRegex, constants.NAME_REQUIRED_ERROR),
+            name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(NAME_REGEX, constants.NAME_REQUIRED_ERROR),
         }),
     ),
 });

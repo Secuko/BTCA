@@ -3,7 +3,9 @@ import MainPage from './components/MainPage.vue';
 </script>
 
 <template>
-  <MainPage/>
+  <router-view></router-view>
+  <div className="app">
+  </div>
 </template>
 
 <style scoped>

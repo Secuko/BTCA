@@ -1,10 +1,14 @@
 <script setup>
 import EmailField from '../Inputs/emailField.vue';
+import InputField from '../Inputs/inputField.vue';
 import NameField from '../Inputs/nameField.vue';
 import Select from '../Inputs/select.vue';
 import Icon from '../UI/Icon.vue';
 import constants from '../constants/inputForm.json'
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
+import { useForm } from 'vee-validate';
+import { toTypedSchema } from '@vee-validate/zod';
+import { z } from 'zod';
 
 let selectedIndex = ref(null)
 let cardSrc = ref(null)
@@ -13,6 +17,25 @@ let currentInfoIndex = ref(null)
 const INTERVAL_MS = 5000
 let intervalId = null
 let loaderValue = ref(null)
+const NAME_REGEX = /^[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?(?:\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)?$/;
+
+const validationSchema = toTypedSchema(
+    z.object({
+        email: z.string({ required_error: '' }).email(constants.EMAIL_REQUIRED_ERROR),
+        name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(NAME_REGEX, constants.NAME_REQUIRED_ERROR),
+        phone: z.string({ required_error: constants.PHONE_ERROR })
+    }),
+);
+
+// const { values, errors, defineField } = useForm({
+//     validationSchema: toTypedSchema(
+//         z.object({
+//             email: z.string({ required_error: '' }).email(constants.EMAIL_REQUIRED_ERROR),
+//             name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(NAME_REGEX, constants.NAME_REQUIRED_ERROR),
+//             phone: z.string({ required_error: constants.PHONE_ERROR })
+//         }),
+//     ),
+// });
 
 onBeforeMount(() => {
     if (constants.INFO_FIELD.length !== 0) {
@@ -85,8 +108,13 @@ const changeCurrentInfoIndex = (data) => {
                     <div class="inside">
                         <form action="" class="form">
                             <Select @changeCard="changeCurrentInfoIndex" />
-                            <NameField/>
-                            <EmailField />
+                            <InputField :schema="validationSchema" :labelText="constants.NAME_LABEL_TEXT"
+                                :placeholder="constants.NAME_PLACEHOLDER_TEXT" :fieldName="'name'"
+                                :width="constants.LONG_WIDTH" />
+
+                            <InputField :schema="validationSchema" :labelText="constants.EMAIL_LABEL_TEXT"
+                                :placeholder="constants.EMAIL_PLACEHOLDER_TEXT" :fieldName="'email'"
+                                :width="constants.SHORT_WIDTH" />
                             <div class="h3-wrapper">
                                 <h3>
                                     Выберите дизайн карты

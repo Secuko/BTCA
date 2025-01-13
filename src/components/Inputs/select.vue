@@ -6,11 +6,15 @@ const emit = defineEmits(['changeCard'])
 
 let selectedIndex = ref(null)
 
-onMounted(() => {
-    if (constants.CARDS.length !== 0) {
-        selectedIndex.value = 0
-    }
-})
+if (constants.CARDS.length !== 0) {
+    selectedIndex.value = 0
+}
+
+// onMounted(() => {
+//     if (constants.CARDS.length !== 0) {
+//         selectedIndex.value = 0
+//     }
+// })
 
 function selectCard(index) {
     selectedIndex.value = index
