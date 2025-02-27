@@ -1,12 +1,9 @@
 <script setup>
-import EmailField from '../Inputs/emailField.vue';
 import InputField from '../Inputs/inputField.vue';
-import NameField from '../Inputs/nameField.vue';
 import Select from '../Inputs/select.vue';
 import Icon from '../UI/Icon.vue';
 import constants from '../constants/inputForm.json'
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
-import { useForm } from 'vee-validate';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
 
@@ -18,24 +15,17 @@ const INTERVAL_MS = 5000
 let intervalId = null
 let loaderValue = ref(null)
 const NAME_REGEX = /^[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?(?:\s[А-ЯЁ][а-яё]+(?:-[А-ЯЁ][а-яё]+)?)?$/;
+const PHONE_REGEX = /\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/
+const DATE_REGEX = /^(0[1-9]|[12]\d|3[01])\.(0[1-9]|1[0-2])\.(19[2-9]\d|200\d|201[0-2])$/
 
 const validationSchema = toTypedSchema(
     z.object({
         email: z.string({ required_error: '' }).email(constants.EMAIL_REQUIRED_ERROR),
         name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(NAME_REGEX, constants.NAME_REQUIRED_ERROR),
-        phone: z.string({ required_error: constants.PHONE_ERROR })
+        phone: z.string({ required_error: constants.PHONE_ERROR }).regex(PHONE_REGEX, constants.PHONE_ERROR),
+        date: z.string({ required_error: constants.DATE_ERROR }).regex(DATE_REGEX, constants.DATE_AGE_ERROR).length(10, constants.DATE_ERROR)
     }),
 );
-
-// const { values, errors, defineField } = useForm({
-//     validationSchema: toTypedSchema(
-//         z.object({
-//             email: z.string({ required_error: '' }).email(constants.EMAIL_REQUIRED_ERROR),
-//             name: z.string({ required_error: constants.NAME_REQUIRED_ERROR }).min(3, constants.NAME_REQUIRED_ERROR).regex(NAME_REGEX, constants.NAME_REQUIRED_ERROR),
-//             phone: z.string({ required_error: constants.PHONE_ERROR })
-//         }),
-//     ),
-// });
 
 onBeforeMount(() => {
     if (constants.INFO_FIELD.length !== 0) {
@@ -111,10 +101,18 @@ const changeCurrentInfoIndex = (data) => {
                             <InputField :schema="validationSchema" :labelText="constants.NAME_LABEL_TEXT"
                                 :placeholder="constants.NAME_PLACEHOLDER_TEXT" :fieldName="'name'"
                                 :width="constants.LONG_WIDTH" />
+                            <div class="double-fields-wrapper">
+                                <InputField :schema="validationSchema" :labelText="constants.PHONE_LABEL_TEXT"
+                                    :placeholder="constants.PHONE_PLACEHOLDER_TEXT" :fieldName="'phone'"
+                                    :width="constants.SHORT_WIDTH" />
+                                <InputField :schema="validationSchema" :labelText="constants.EMAIL_LABEL_TEXT"
+                                    :placeholder="constants.EMAIL_PLACEHOLDER_TEXT" :fieldName="'email'"
+                                    :width="constants.SHORT_WIDTH" />
+                            </div>
+                            <InputField :schema="validationSchema" :labelText="constants.DATE_LABEL_TEXT"
+                                :placeholder="constants.DATE_PLACEHOLDER_TEXT" :fieldName="'date'"
+                                :width="constants.LONG_WIDTH" />
 
-                            <InputField :schema="validationSchema" :labelText="constants.EMAIL_LABEL_TEXT"
-                                :placeholder="constants.EMAIL_PLACEHOLDER_TEXT" :fieldName="'email'"
-                                :width="constants.SHORT_WIDTH" />
                             <div class="h3-wrapper">
                                 <h3>
                                     Выберите дизайн карты
@@ -232,5 +230,11 @@ h3 {
 .card-image {
     width: 27.2rem;
     height: 17.2rem;
+}
+
+.double-fields-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 </style>

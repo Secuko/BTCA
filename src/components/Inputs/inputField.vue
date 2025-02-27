@@ -1,7 +1,5 @@
 <script setup>
 import { useForm } from 'vee-validate';
-import { toTypedSchema } from '@vee-validate/zod';
-import { z } from 'zod';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../UI/Icon.vue';
@@ -19,6 +17,9 @@ const inputForm = ref(null)
 const inputField = ref(null)
 const inputIsNotFocused = ref(null)
 const isError = ref(null)
+const phoneStartValue = '+7 (';
+const phoneNumberEnd = ref(phoneStartValue)
+const dateEnd = ref("")
 
 const { values, errors, defineField } = useForm({
   validationSchema: props.schema,
@@ -40,9 +41,11 @@ const checkErrows = () => {
 const handleClickOutside = (event) => {
   const input = inputForm.value;
   if (input && !input.contains(event.target)) {
-    if (!field.value && field != "") {
-      changeInputVisibility(false)
-    }
+    // if (!field.value && field != "") {
+    //   changeInputVisibility(false)
+    // }
+    phoneNumberEnd.value = ""
+    if (field.value == phoneStartValue) field.value = undefined;
     inputIsNotFocused.value = true;
     // console.log(errors.value.email)
     if (errors.value[props.fieldName] != null) {
@@ -50,6 +53,39 @@ const handleClickOutside = (event) => {
     }
   }
 }
+
+const formatPhone = () => {
+  let formatted = phoneStartValue
+  if (field.value == undefined) field.value = formatted;
+  let numbers = field.value.replace(/\D/g, ""); // убираю символы кроме цифр
+  // console.log(numbers)
+  // console.log(field.value)
+  if (numbers.startsWith("7")) {
+    numbers = numbers.substring(1); // убираю префикс
+  }
+
+  if (numbers.length > 0) formatted += numbers.substring(0, 3);
+  if (numbers.length >= 4) formatted += ") " + numbers.substring(3, 6);
+  if (numbers.length >= 7) formatted += "-" + numbers.substring(6, 8);
+  if (numbers.length >= 9) formatted += "-" + numbers.substring(8, 10);
+
+  phoneNumberEnd.value = formatted + props.placeholder.substring(formatted.length);
+  field.value = formatted
+  // if (formatted = '+7 (') field.value = undefined;
+};
+
+const formatDate = () => {
+  let formatted = ""
+  if (field.value == undefined) field.value = formatted;
+  let numbers = field.value.replace(/\D/g, "");
+
+  if (numbers.length > 0) formatted += numbers.substring(0, 2);
+  if (numbers.length > 2) formatted += "." + numbers.substring(2, 4);
+  if (numbers.length >= 5) formatted += "." + numbers.substring(4);
+  dateEnd.value = formatted + props.placeholder.substring(formatted.length);
+  field.value = formatted
+}
+
 
 const isIconHidden = computed(() => {
   return (isError.value || (errors.value[props.fieldName] !== undefined) || (field.value === undefined))
@@ -68,11 +104,22 @@ onUnmounted(() => {
 
 <template>
   <div class="input-form">
-    <div :class="['input-field', { 'errorBackligth': isError }]" :style="{width: props.width}" ref="inputForm">
+    <div :class="['input-field', { 'errorBackligth': isError }]" :style="{ width: props.width }" ref="inputForm">
       <div class="input-wrapper">
-        <input type="text" id="inputId" ref="inputField" :placeholder="props.placeholder" @input="checkErrows"
-          @focus="changeBackligth" v-model="field" />
-        <label for="inputId" :class="[ 'label', {'errorBackligth': isError }]"> {{ props.labelText }} </label>
+        <template v-if="fieldName == 'phone'">
+          <div>{{ phoneNumberEnd }}</div>
+          <input type="text" :id="`input-${fieldName}`" v-model="field" @input="formatPhone"
+            :placeholder="props.placeholder" @focus="formatPhone(); changeBackligth()" maxlength="18" />
+        </template>
+        <template v-else-if="fieldName == 'date'">
+          <div>{{ dateEnd }}</div>
+          <input type="text" :id="`input-${fieldName}`" v-model="field" @input="formatDate"
+            :placeholder="props.placeholder" @focus="formatDate(); changeBackligth()" maxlength="10" />
+        </template>
+        <input v-else type="text" :id="`input-${fieldName}`" ref="inputField" :placeholder="props.placeholder"
+          @input="checkErrows" @focus="changeBackligth" v-model="field" />
+        <label :for="`input-${fieldName}`" :class="['label', { 'errorBackligth': isError }]"> {{ props.labelText }}
+        </label>
       </div>
       <div :class="['mark', { 'hidden': isIconHidden }]">
         <Icon :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_CHECKED"
@@ -85,11 +132,10 @@ onUnmounted(() => {
 
 
 <style lang="scss" scoped>
-
-.input-wrapper input:focus + .label,
-.input-wrapper input:not(:placeholder-shown) + .label {
-    height: 50%;
-    font-size: 1.4rem;
+.input-wrapper input:focus+.label,
+.input-wrapper input:not(:placeholder-shown)+.label {
+  height: 50%;
+  font-size: 1.4rem;
 }
 
 .input-form {
@@ -115,6 +161,7 @@ onUnmounted(() => {
 
 .label {
   position: absolute;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: 100%;
@@ -138,6 +185,18 @@ onUnmounted(() => {
   outline: none;
   font-size: 1.6rem;
   color: none;
+  z-index: 100;
+}
+
+.input-wrapper div {
+  position: absolute;
+  bottom: 1px;
+  left: 0;
+  height: 50%;
+  font-size: 1.6rem;
+  border: none;
+  outline: none;
+  color: rgb(158, 158, 158)
 }
 
 .mark {
@@ -164,5 +223,4 @@ onUnmounted(() => {
 .input {
   flex: 1;
 }
-
 </style>
