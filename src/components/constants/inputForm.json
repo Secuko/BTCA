@@ -17,8 +17,11 @@
     "DATE_AGE_ERROR": "Возраст должен быть между 14 и 100 годами",
     "DATE_LABEL_TEXT": "Дата рождения*",
     "ICON_CHECKED": "icon-checked",
+    "ICON_ARROW": "icon-arrow",
     "SHORT_WIDTH": "25.8rem",
-    "LONG_WIDTH": "53.6rem",
+    "LONG_WIDTH": "100%",
+    "SELECT_CHECK_ICON": "icon-checked",
+    "SELECT_FIELD_TEXT": "Выберите повышенный кэшбэк (четыре категории)",
     "CARDS": [
         {
             "src": "/card1.png",
@@ -35,6 +38,65 @@
         {
             "src": "/card4.png",
             "alt": "card4"
+        }
+    ],
+    "SELECT_ITEMS": [
+        {
+            "index": "1",
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "1% - Все покупки"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "10% - Аптеки"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "10% - ЖКХ"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "10% - Дом и ремонт"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "5% - Рестораны"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "5% - Такси"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "5% - Одежда и обувь"
+        },
+        {
+            "icon": "icon-facebook",
+            "alt": "android",
+            "width": "2.8rem",
+            "height": "2.8rem",
+            "text": "17% - Накопительный счет"
         }
     ],
     "INFO_FIELD": [

@@ -6,6 +6,7 @@ import constants from '../constants/inputForm.json'
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
+import DropdownSelect from '../Inputs/dropdownSelect.vue';
 
 let selectedIndex = ref(null)
 let cardSrc = ref(null)
@@ -97,7 +98,8 @@ const changeCurrentInfoIndex = (data) => {
                 <form class="cardForm">
                     <div class="inside">
                         <form action="" class="form">
-                            <Select @changeCard="changeCurrentInfoIndex" />
+                            <Select @changeCard="changeCurrentInfoIndex"/>
+                            <DropdownSelect :labelText="constants.SELECT_FIELD_TEXT" />
                             <InputField :schema="validationSchema" :labelText="constants.NAME_LABEL_TEXT"
                                 :placeholder="constants.NAME_PLACEHOLDER_TEXT" :fieldName="'name'"
                                 :width="constants.LONG_WIDTH" />

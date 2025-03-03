@@ -1,13 +1,5 @@
 <script setup>
-// export default {
-//     computed: {
-//         dynamicStyles() {
-//             return {
-//                 '--icon-color': this.iconColor,
-//             };
-//         }
-//     },
-// }
+
 
 function getURL(src) {
     return new URL(src, import.meta.url).href

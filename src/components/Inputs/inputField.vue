@@ -173,6 +173,7 @@ onUnmounted(() => {
   font-size: 1.6rem;
   cursor: text;
   transition: all 0.3s ease;
+  user-select: none;
 }
 
 .input-wrapper input {
