@@ -5,14 +5,9 @@ import constants from '../constants/inputForm.json'
 import Icon from '../UI/Icon.vue';
 
 const props = defineProps({
-    fieldName: String,
-    schema: Object,
-    width: String,
     labelText: String,
-    placeholder: String,
 })
 
-let isInputVisible = ref(false)
 const isMenuOpen = ref(false)
 const selectForm = ref(null)
 const openedForm = ref(null)
@@ -21,14 +16,10 @@ const selectedIndexes = ref([])
 
 const selectItem = (index) => {
     if (selectedIndexes.value.includes(index)) {
-        selectedIndexes.value.splice(items.indexOf(index))
-    } else if (selectedIndexes.value.length <= 4) {
+        selectedIndexes.value.splice(selectedIndexes.value.indexOf(index), 1)
+    } else if (selectedIndexes.value.length <= 3) {
         selectedIndexes.value.push(index)
     }
-}
-
-const changeInputVisibility = (value) => {
-    isInputVisible.value = value
 }
 
 onMounted(() => {
@@ -38,17 +29,10 @@ onMounted(() => {
 const handleClickOutside = (event) => {
     const select = selectForm.value;
     const form = openedForm.value
-    console.log(isMenuOpen.value)
-    //(select && !select.contains(event.target)) ||
-    if (isMenuOpen.value && (form && !form.contains(event.target))) {
-        // if (!field.value && field != "") {
-        //   changeInputVisibility(false)
-        // }
+    if (!isMenuOpen.value && (select && select.contains(event.target))) {
+        isMenuOpen.value = true
+    } else if (isMenuOpen.value && (form && !form.contains(event.target))) {
         isMenuOpen.value = false;
-        console.log(isMenuOpen.value)
-        // console.log(errors.value.email)
-    } else {
-        changeMenuState()
     }
 }
 
@@ -56,37 +40,31 @@ onUnmounted(() => {
     document.removeEventListener("click", handleClickOutside);
 })
 
-function checkItemIsActive (index){
+function checkItemIsActive(index) {
     return selectedIndexes.value.includes(index)
-}
-
-
-const changeMenuState = () => {
-    isMenuOpen.value = !isMenuOpen.value
 }
 
 </script>
 
 <template>
     <div class="select-form">
-        <div :class="['input-field']" ref="selectForm" @click="changeMenuState">
-            <label :class="['label']" @click="changeMenuState"> {{ props.labelText }}</label>
+        <div :class="['input-field']" ref="selectForm">
+            <label :class="['label']"> {{ props.labelText }}</label>
             <div :class="['mark']">
                 <Icon :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_ARROW"
                     :spritePath="constants.SPRITE_PATH" :iconColor="'#0000008a'" :hoverEffect="false" />
             </div>
         </div>
         <div :class="['select-form_menu']" v-if="isMenuOpen" ref="openedForm">
-            <div :class="['menu-item']"
-                v-for="(item, index) in constants.SELECT_ITEMS" :key="index">
+            <div :class="['menu-item']" v-for="(item, index) in constants.SELECT_ITEMS" :key="index">
                 <div class="select-icon" @click="selectItem(index)">
-                    <Icon v-if="checkItemIsActive(index)" :iconHeight="'2.0rem'" :iconWidth="'2.0rem'"
+                    <Icon :class="[{ 'invisible': !checkItemIsActive(index) }]" :iconHeight="'2.0rem'" :iconWidth="'2.0rem'"
                         :iconName="constants.SELECT_CHECK_ICON" :spritePath="constants.SPRITE_PATH"
-                        :iconColor="'#333333'" :hoverEffect="false" />
+                        :iconColor="'#333333'" :hoverEffect="false"/>
                 </div>
                 <div class="service-icon">
                     <Icon :iconHeight="`${item.height}`" :iconWidth="`${item.width}`" :iconName="`${item.icon}`"
-                        :spritePath="constants.SPRITE_PATH" />
+                        :spritePath="constants.SPRITE_PATH" :hoverEffect="false"/>
                 </div>
                 <h4 class="service-text">
                     {{ item.text }}
@@ -107,6 +85,10 @@ const changeMenuState = () => {
 .select-form {
     height: 10rem;
     position: relative;
+}
+
+.invisible{
+    display: none;
 }
 
 .select-form_menu {
