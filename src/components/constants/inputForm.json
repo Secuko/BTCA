@@ -42,22 +42,21 @@
     ],
     "SELECT_ITEMS": [
         {
-            "index": "1",
-            "icon": "icon-facebook",
+            "icon": "icon-all",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "1% - Все покупки"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-farmacy",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "10% - Аптеки"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-ozon",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",

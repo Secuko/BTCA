@@ -41,9 +41,6 @@ const checkErrows = () => {
 const handleClickOutside = (event) => {
   const input = inputForm.value;
   if (input && !input.contains(event.target)) {
-    // if (!field.value && field != "") {
-    //   changeInputVisibility(false)
-    // }
     phoneNumberEnd.value = ""
     if (field.value == phoneStartValue) field.value = undefined;
     inputIsNotFocused.value = true;
@@ -71,7 +68,6 @@ const formatPhone = () => {
 
   phoneNumberEnd.value = formatted + props.placeholder.substring(formatted.length);
   field.value = formatted
-  // if (formatted = '+7 (') field.value = undefined;
 };
 
 const formatDate = () => {

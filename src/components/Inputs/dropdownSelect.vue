@@ -51,20 +51,20 @@ function checkItemIsActive(index) {
         <div :class="['input-field']" ref="selectForm">
             <label :class="['label']"> {{ props.labelText }}</label>
             <div :class="['mark']">
-                <Icon :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_ARROW"
+                <Icon :class="['icon',{'rotated_up' : isMenuOpen}]" :iconHeight="'1.6rem'" :iconWidth="'1.6rem'" :iconName="constants.ICON_ARROW"
                     :spritePath="constants.SPRITE_PATH" :iconColor="'#0000008a'" :hoverEffect="false" />
             </div>
         </div>
         <div :class="['select-form_menu']" v-if="isMenuOpen" ref="openedForm">
             <div :class="['menu-item']" v-for="(item, index) in constants.SELECT_ITEMS" :key="index">
                 <div class="select-icon" @click="selectItem(index)">
-                    <Icon :class="[{ 'invisible': !checkItemIsActive(index) }]" :iconHeight="'2.0rem'" :iconWidth="'2.0rem'"
-                        :iconName="constants.SELECT_CHECK_ICON" :spritePath="constants.SPRITE_PATH"
-                        :iconColor="'#333333'" :hoverEffect="false"/>
+                    <Icon :class="[{ 'invisible': !checkItemIsActive(index) }]" :iconHeight="'2.0rem'"
+                        :iconWidth="'2.0rem'" :iconName="constants.SELECT_CHECK_ICON"
+                        :spritePath="constants.SPRITE_PATH" :iconColor="'#333333'" :hoverEffect="false" />
                 </div>
                 <div class="service-icon">
                     <Icon :iconHeight="`${item.height}`" :iconWidth="`${item.width}`" :iconName="`${item.icon}`"
-                        :spritePath="constants.SPRITE_PATH" :hoverEffect="false"/>
+                        :spritePath="constants.SPRITE_PATH" :hoverEffect="false" />
                 </div>
                 <h4 class="service-text">
                     {{ item.text }}
@@ -87,7 +87,7 @@ function checkItemIsActive(index) {
     position: relative;
 }
 
-.invisible{
+.invisible {
     display: none;
 }
 
@@ -110,7 +110,6 @@ function checkItemIsActive(index) {
     height: 2.8rem;
     width: 2.8rem;
     margin-right: 1.0rem;
-    background-color: $grey;
 }
 
 .select-icon {
@@ -188,5 +187,16 @@ function checkItemIsActive(index) {
     border-radius: 1.2rem;
     display: flex;
     flex-direction: column;
+    transition: all 0.3s ease;
 }
+
+.icon, .rotated_up{
+    transition: all 0.3s ease;
+}
+
+.rotated_up{
+    -webkit-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
+}
+
 </style>
