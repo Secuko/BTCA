@@ -1,6 +1,6 @@
 <script setup>
 import constants from '../constants/header.json'
-import Icon from '../UI/Icon.vue';
+import Icon from './Icon.vue';
 import { onMounted, onUnmounted, ref } from 'vue';
 import { getBTCValue } from '../../api/main';
 

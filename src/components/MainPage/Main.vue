@@ -1,8 +1,8 @@
 <script setup>
 import Swiper from 'swiper';
 import constants from '../constants/main.json';
-import SliderCard from './common/SliderCard.vue';
-import Icon from '../UI/Icon.vue';
+import SliderCard from '../common/SliderCard.vue';
+import Icon from '../common/Icon.vue';
 import { computed, onBeforeMount, onMounted, ref } from 'vue';
 
 //variables

@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
-import Icon from '../UI/Icon.vue';
+import Icon from '../common/Icon.vue';
 
 const props = defineProps({
     labelText: String,
@@ -146,7 +146,7 @@ function checkItemIsActive(index) {
 .input-field {
     height: 5.6rem;
     padding: 0.6rem 1.6rem;
-    background-color: white;
+    background-color: $white;
     border-radius: 1.2rem;
     display: flex;
     flex-direction: row;

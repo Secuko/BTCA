@@ -1,7 +1,6 @@
 {
     "H3_TEXT": "Выберите дизайн карты",
     "SPRITE_PATH": "../../assets/icons/sprite.svg",
-    "SMALL_TEXT_1": "Гражданство РФ?",
     "CONTRACT_LINK": "Заполняя форму, я принимаю условия передачи информации и использования карты до встречи и даю согласие на получение информации о продуктах и услугах Банка и партнеров",
     "EMAIL_LABEL_TEXT": "Электронная почта",
     "EMAIL_PLACEHOLDER_TEXT": "ivan@domain.ru",
@@ -22,6 +21,7 @@
     "LONG_WIDTH": "100%",
     "SELECT_CHECK_ICON": "icon-checked",
     "SELECT_FIELD_TEXT": "Выберите повышенный кэшбэк (четыре категории)",
+    "CITIZENSHIP_TEXT": "Гражданство РФ?",
     "CARDS": [
         {
             "src": "/card1.png",
@@ -56,42 +56,42 @@
             "text": "10% - Аптеки"
         },
         {
-            "icon": "icon-ozon",
+            "icon": "icon-all",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "10% - ЖКХ"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-all",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "10% - Дом и ремонт"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-restourant",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "5% - Рестораны"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-taxi",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "5% - Такси"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-sport",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
             "text": "5% - Одежда и обувь"
         },
         {
-            "icon": "icon-facebook",
+            "icon": "icon-vklad",
             "alt": "android",
             "width": "2.8rem",
             "height": "2.8rem",
@@ -102,23 +102,33 @@
         {
             "name": "icon-windows",
             "alt": "windows",
-            "color":"#636D85",
+            "color": "#636D85",
             "head": "Не требуется паспорт",
             "text": "При оформлении заявки на карту \n не требуется вводить паспортные данные"
         },
         {
             "name": "icon-android",
             "alt": "android",
-            "color":"#636D85",
+            "color": "#636D85",
             "head": "Кэшбэк до 3000 ₽ в месяц",
             "text": "С подпиской Pro лимит кэшбэка — 5000 ₽"
         },
         {
             "name": "icon-apple",
             "alt": "apple",
-            "color":"#636D85",
+            "color": "#636D85",
             "head": "Платежи и переводы \n без комиссии",
             "text": "до 30 000 000 ₽ в месяц через систему \n быстрых платежей"
+        }
+    ],
+    "RADIO": [
+        {
+            "text": "Да",
+            "value": "Yes"
+        },
+        {
+            "text": "Нет",
+            "value": "No"
         }
     ]
 }

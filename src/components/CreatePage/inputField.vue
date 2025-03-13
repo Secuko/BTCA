@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
-import Icon from '../UI/Icon.vue';
+import Icon from '../common/Icon.vue';
 
 const props = defineProps({
   fieldName: String,

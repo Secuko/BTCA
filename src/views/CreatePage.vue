@@ -1,12 +1,13 @@
 <script setup>
-import InputField from '../Inputs/inputField.vue';
-import Select from '../Inputs/select.vue';
-import Icon from '../UI/Icon.vue';
-import constants from '../constants/inputForm.json'
+import InputField from '../components/CreatePage/inputField.vue';
+import Select from '../components/CreatePage/select.vue';
+import Icon from '../components/common/Icon.vue';
+import constants from '../components/constants/inputForm.json'
 import { onBeforeMount, onMounted, onUnmounted, ref } from 'vue';
 import { toTypedSchema } from '@vee-validate/zod';
 import { z } from 'zod';
-import DropdownSelect from '../Inputs/dropdownSelect.vue';
+import RadioField from '../components/CreatePage/radioField.vue';
+import DropdownSelect from '../components/CreatePage/dropdownSelect.vue';
 
 let selectedIndex = ref(null)
 let cardSrc = ref(null)
@@ -98,7 +99,12 @@ const changeCurrentInfoIndex = (data) => {
                 <form class="cardForm">
                     <div class="inside">
                         <form action="" class="form">
-                            <Select @changeCard="changeCurrentInfoIndex"/>
+                            <div class="h3-wrapper">
+                                <h3>
+                                    {{ constants.H3_TEXT }}
+                                </h3>
+                            </div>
+                            <Select @changeCard="changeCurrentInfoIndex" />
                             <DropdownSelect :labelText="constants.SELECT_FIELD_TEXT" />
                             <InputField :schema="validationSchema" :labelText="constants.NAME_LABEL_TEXT"
                                 :placeholder="constants.NAME_PLACEHOLDER_TEXT" :fieldName="'name'"
@@ -114,12 +120,12 @@ const changeCurrentInfoIndex = (data) => {
                             <InputField :schema="validationSchema" :labelText="constants.DATE_LABEL_TEXT"
                                 :placeholder="constants.DATE_PLACEHOLDER_TEXT" :fieldName="'date'"
                                 :width="constants.LONG_WIDTH" />
-
-                            <div class="h3-wrapper">
-                                <h3>
-                                    Выберите дизайн карты
-                                </h3>
+                            <div class="h4-wrapper">
+                                <h4>
+                                    {{ constants.CITIZENSHIP_TEXT }}
+                                </h4>
                             </div>
+                            <RadioField/>
                         </form>
                     </div>
                 </form>
@@ -174,11 +180,17 @@ const changeCurrentInfoIndex = (data) => {
 
 .h3-wrapper {
     display: flex;
+    margin-bottom: 2rem;
 }
 
 h3 {
     @include text(h3CardForm);
-    color: $buttonBlack
+    color: $grey
+}
+
+h4 {
+    @include text(captionInfoHeader);
+    color: $grey
 }
 
 .information-message {
@@ -239,4 +251,16 @@ h3 {
     flex-direction: row;
     justify-content: space-between;
 }
+
+.h4-wrapper{
+    height: 2.4rem;
+    margin-bottom: 3.1rem;
+    margin-top: 1.2rem;
+}
+
+
+
 </style>
+
+//пересмотреть архитектуры - разбить все нормально по папкам
+//FSD архитектуры

@@ -1,6 +1,6 @@
 <script setup>
 import constants from '../constants/download.json'
-import Icon from '../UI/Icon.vue';
+import Icon from '../common/Icon.vue';
 
 </script>
 

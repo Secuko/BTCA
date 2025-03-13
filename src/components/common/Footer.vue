@@ -1,6 +1,6 @@
 <script setup>
 import constants from '../constants/footer.json'
-import Icon from '../UI/Icon.vue';
+import Icon from './Icon.vue';
 
 </script>
 
