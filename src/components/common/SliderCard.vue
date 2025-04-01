@@ -23,7 +23,8 @@ function getURL(src) {
 
 <template>
     <div :class="['SlideCard', $style.SlideCard, { [$style['_active']]: props.active }]"
-        :style="{ backgroundImage: `url(${getURL(props.card.img)})` }">
+        :style="{ backgroundImage: `url(${props.card.img})` }">
+        <!-- :style="{ backgroundImage: `url(${getURL(props.card.img)})` }"> -->
         <span :class="$style.subtitle">{{ props.card.header_text }}</span>
         <span :class="$style.title">{{ props.card.h3_text }}</span>
         <span :class="$style.text">{{ props.card.small_text }}</span>

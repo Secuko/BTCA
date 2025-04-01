@@ -33,7 +33,7 @@ import Icon from '../common/Icon.vue';
                     </button>
                 </div>
                 <div class="image">
-                    <img src="../../assets/images/ipad_iphone.png" alt="ipad_iphone">
+                    <img src="/assets/images/ipad_iphone.png" alt="ipad_iphone">
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@ import Icon from '../common/Icon.vue';
 .download {
     width: 100%;
     background-size: cover;
-    background-image: url('../../assets/images/download-background.png');
+    background-image: url('/assets/images/download-background.png');
 }
 
 .apple-icon {

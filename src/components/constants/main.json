@@ -9,21 +9,21 @@
             "h3_text": "Глобальные транзакции",
             "small_text": "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
             "button_text": "Перейти и получить",
-            "img": "../../../assets/images/slaider1.png"
+            "img": "/assets/images/slaider1.png"
         },
         {
             "header_text": "Помогите защитить сеть",
             "h3_text": "И получите вознаграждение",
             "small_text": "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
             "button_text": "Перейти и получить",
-            "img": "../../../assets/images/slaider2.png"
+            "img": "/assets/images/slaider2.png"
         },
         {
             "header_text": "Защитите свои активы с помощью",
             "h3_text": "Секретных транзакций",
             "small_text": "An improbable, overnight rise has established a new token as a blockchain gaming heavyweight.",
             "button_text": "Перейти и получить",
-            "img": "../../../assets/images/slaider3.png"
+            "img": "/assets/images/slaider3.png"
         }
     ]
 }

@@ -10,21 +10,21 @@
             "step_index": "1",
             "step": "шаг",
             "text": "Скачайте\nприложение",
-            "src": "../../assets/images/instruction1.png",
+            "src": "/assets/images/instruction1.png",
             "alt": "image"
         },
         {
             "step_index": "2",
             "step": "шаг",
             "text": "Регистрируйтесь",
-            "src": "../../assets/images/instruction2.png",
+            "src": "/assets/images/instruction2.png",
             "alt": "image"
         },
         {
             "step_index": "3",
             "step": "шаг",
             "text": "Пользуйтесь",
-            "src": "../../assets/images/instruction3.png",
+            "src": "/assets/images/instruction3.png",
             "alt": "image"
         }
     ]

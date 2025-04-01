@@ -1,18 +1,5 @@
 <script setup>
 import constants from '../constants/instructions.json'
-// export default {
-//     computed: {
-//         constants() {
-//             return constants;
-//         }
-//     },
-//     methods: {
-//         getURL(src) {
-//             return new URL(src, import.meta.url).href
-//         }
-//     }
-
-// }
 
 function getURL(src) {
     return new URL(src, import.meta.url).href
@@ -33,7 +20,7 @@ function getURL(src) {
         </div>
         <div class="instructions">
             <div class="instruction" v-for="(item, index) in constants.INSTRUCTIONS" :key="index"
-                :style="{ backgroundImage: `url(${getURL(item.src)})`, alt: `${item.alt}` }">
+                :style="{ backgroundImage: `url(${item.src})`, alt: `${item.alt}` }">
                 <div class="instruction__header">
                     <span class="step_index"> {{ item.step_index }}</span>
                     <span class="step">{{ item.step }}</span>
@@ -155,7 +142,7 @@ function getURL(src) {
     width: 114rem;
     height: 40.2rem;
     border-radius: 2.8rem;
-    background: url('../../assets/images/banner.png');
+    background: url('/assets/images/banner.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;

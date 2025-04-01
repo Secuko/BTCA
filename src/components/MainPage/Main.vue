@@ -67,8 +67,8 @@ const isStart = computed(() => {
 <template>
     <main class="main">
         <section class="container">
-            <img src="../../assets/images/earth.png" alt="earth" class="earth-image">
-            <img src="../../assets/images/coins.png" alt="coins" class="coins-image">
+            <img src="/assets/images/earth.png" alt="earth" class="earth-image">
+            <img src="/assets/images/coins.png" alt="coins" class="coins-image">
             <div class="main-text-wrapper">
                 <div class="main-text">
                     <div class="main-text__h1-wrapper">
@@ -170,7 +170,7 @@ const isStart = computed(() => {
 
 .main {
     position: relative;
-    background-image: url('../../assets/images/main-background.png');
+    background-image: url('/assets/images/main-background.png');
     background-size: cover;
     height: 124rem;
     display: flex;

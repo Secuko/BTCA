@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useForm } from 'vee-validate';
-import { onMounted, onUnmounted, ref, computed } from 'vue';
+import { onMounted, onUnmounted, ref, computed, Ref } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../common/Icon.vue';
 
@@ -14,7 +14,7 @@ interface Props {
 
 const props = defineProps < Props > ();
 
-const isInputVisible = ref < boolean > (false);
+// const isInputVisible = ref < boolean > (false);
 const inputForm = ref < HTMLElement | null > (null);
 const inputField = ref < HTMLInputElement | null > (null);
 const inputIsNotFocused = ref < boolean | null > (null);
@@ -43,7 +43,7 @@ const checkErrows = () => {
 
 const handleClickOutside = (event: MouseEvent) => {
   const input = inputForm.value;
-  if (input && !input.contains(event.target)) {
+  if (input && !input.contains(event.target as Node)) {
     phoneNumberEnd.value = ""
     if (field.value == phoneStartValue) field.value = undefined;
     inputIsNotFocused.value = true;
@@ -67,7 +67,7 @@ const formatPhone = () => {
   if (numbers.length >= 7) formatted += "-" + numbers.substring(6, 8);
   if (numbers.length >= 9) formatted += "-" + numbers.substring(8, 10);
 
-  phoneNumberEnd.value = formatted + props.placeholder.substring(formatted.length);
+  phoneNumberEnd.value = formatted + (props.placeholder?.substring(formatted.length) || '');
   field.value = formatted
 };
 
@@ -79,7 +79,7 @@ const formatDate = () => {
   if (numbers.length > 0) formatted += numbers.substring(0, 2);
   if (numbers.length > 2) formatted += "." + numbers.substring(2, 4);
   if (numbers.length >= 5) formatted += "." + numbers.substring(4);
-  dateEnd.value = formatted + props.placeholder.substring(formatted.length);
+  dateEnd.value = formatted + props.placeholder?.substring(formatted.length);
   field.value = formatted
 }
 
@@ -103,19 +103,19 @@ onUnmounted(() => {
   <div class="input-form">
     <div :class="['input-field', { 'errorBackligth': isError }]" :style="{ width: props.width }" ref="inputForm">
       <div class="input-wrapper">
-        <template v-if="fieldName == 'phone'">
+        <template v-if="props.fieldName == 'phone'">
           <div>{{ phoneNumberEnd }}</div>
-          <input type="text" :id="`input-${fieldName}`" v-model="field" @input="formatPhone"
+          <input type="text" :id="`input-${props.fieldName}`" v-model="field" @input="formatPhone"
             :placeholder="props.placeholder" @focus="formatPhone(); changeBackligth()" maxlength="18" />
         </template>
-        <template v-else-if="fieldName == 'date'">
+        <template v-else-if="props.fieldName == 'date'">
           <div>{{ dateEnd }}</div>
-          <input type="text" :id="`input-${fieldName}`" v-model="field" @input="formatDate"
+          <input type="text" :id="`input-${props.fieldName}`" v-model="field" @input="formatDate"
             :placeholder="props.placeholder" @focus="formatDate(); changeBackligth()" maxlength="10" />
         </template>
-        <input v-else type="text" :id="`input-${fieldName}`" ref="inputField" :placeholder="props.placeholder"
+        <input v-else type="text" :id="`input-${props.fieldName}`" ref="inputField" :placeholder="props.placeholder"
           @input="checkErrows" @focus="changeBackligth" v-model="field" />
-        <label :for="`input-${fieldName}`" :class="['label', { 'errorBackligth': isError }]"> {{ props.labelText }}
+        <label :for="`input-${props.fieldName}`" :class="['label', { 'errorBackligth': isError }]"> {{ props.labelText }}
         </label>
       </div>
       <div :class="['mark', { 'hidden': isIconHidden }]">
