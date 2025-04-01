@@ -1,5 +1,4 @@
 <script setup>
-import { useForm } from 'vee-validate';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../common/Icon.vue';

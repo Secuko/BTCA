@@ -1,44 +1,47 @@
-<script setup>
+<script setup lang="ts">
 import { useForm } from 'vee-validate';
 import { onMounted, onUnmounted, ref, computed } from 'vue';
 import constants from '../constants/inputForm.json'
 import Icon from '../common/Icon.vue';
 
-const props = defineProps({
-  fieldName: String,
-  schema: Object,
-  width: String,
-  labelText: String,
-  placeholder: String,
-})
+interface Props {
+  fieldName: string;
+  schema: Record<string, any>;
+  width?: string;
+  labelText?: string;
+  placeholder?: string;
+}
 
-let isInputVisible = ref(false)
-const inputForm = ref(null)
-const inputField = ref(null)
-const inputIsNotFocused = ref(null)
-const isError = ref(null)
+const props = defineProps < Props > ();
+
+const isInputVisible = ref < boolean > (false);
+const inputForm = ref < HTMLElement | null > (null);
+const inputField = ref < HTMLInputElement | null > (null);
+const inputIsNotFocused = ref < boolean | null > (null);
+const isError = ref < boolean | null > (null);
 const phoneStartValue = '+7 (';
-const phoneNumberEnd = ref(phoneStartValue)
-const dateEnd = ref("")
+const phoneNumberEnd: Ref<string> = ref(phoneStartValue);
+const dateEnd: Ref<string> = ref('');
+
 
 const { values, errors, defineField } = useForm({
   validationSchema: props.schema,
 });
 
-const changeInputVisibility = (value) => {
-  isInputVisible.value = value
-}
+// const changeInputVisibility = (value: boolean) => {
+//   isInputVisible.value = value
+// }
 
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 })
 
-const [field] = defineField(props.fieldName);
+const [field] = defineField < string > (props.fieldName);
 
 const checkErrows = () => {
 }
 
-const handleClickOutside = (event) => {
+const handleClickOutside = (event: MouseEvent) => {
   const input = inputForm.value;
   if (input && !input.contains(event.target)) {
     phoneNumberEnd.value = ""
@@ -55,8 +58,6 @@ const formatPhone = () => {
   let formatted = phoneStartValue
   if (field.value == undefined) field.value = formatted;
   let numbers = field.value.replace(/\D/g, ""); // убираю символы кроме цифр
-  // console.log(numbers)
-  // console.log(field.value)
   if (numbers.startsWith("7")) {
     numbers = numbers.substring(1); // убираю префикс
   }
